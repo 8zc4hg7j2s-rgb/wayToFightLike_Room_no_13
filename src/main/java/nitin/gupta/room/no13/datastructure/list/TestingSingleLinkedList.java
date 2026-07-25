@@ -1,4 +1,4 @@
-package nitin.gupta.room.no13.datastructure;
+package nitin.gupta.room.no13.datastructure.list;
 
 import java.util.ArrayList;
 import java.util.List;

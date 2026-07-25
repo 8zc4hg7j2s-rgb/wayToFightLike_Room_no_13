@@ -1,9 +1,11 @@
-package nitin.gupta.room.no13.datastructure;
+package nitin.gupta.room.no13.datastructure.list;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -213,6 +215,23 @@ public class SingleLinkedList<T extends Comparable<T>> {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    public boolean detectCycleInLinkedList_app2(Node<T> node) {
+        if (head == null) {
+            return false;
+        } else {
+            Map<Node, Boolean> visited = new HashMap<>();
+            boolean flag = false;
+            Node tmp = head;
+            while (tmp != null) {
+                if (visited.containsKey(tmp))
+                    return true;
+                visited.put(tmp, true);
+                tmp = tmp.next;
+            }
+            return false;
+        }
     }
 
     @EqualsAndHashCode
