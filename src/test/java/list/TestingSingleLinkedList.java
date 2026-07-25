@@ -1,4 +1,5 @@
-package nitin.gupta.room.no13.datastructure.list;
+package list;
+import nitin.gupta.room.no13.datastructure.list.SingleLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
