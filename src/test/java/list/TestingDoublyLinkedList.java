@@ -22,10 +22,10 @@ public class TestingDoublyLinkedList {
         list.insertAfter(list.getMiddle(), 13);
         list.print();
         list.printReverse();
-        list.deleteAtHead();
+        list.deleteAtPosition(0);
         list.print();
         list.printReverse();
-        list.deleteAtHead();
+        list.deleteAtPosition(16);
         list.print();
         list.printReverse();
     }

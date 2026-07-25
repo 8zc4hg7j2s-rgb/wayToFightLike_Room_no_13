@@ -142,11 +142,70 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         if (head != null) head.prev=null;
         else tail=null;
     }
+//– remove last node
+    public void deleteAtTail() {
+        if (tail == null) return;
+        tail = tail.prev;
+        if (tail != null) tail.next=null;
+        else head=null;
+    }
+    //– remove node at a specific index
+    public void deleteAtPosition(int index) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("index cannot be negative");
+        }
 
-    //7. deleteAtTail() – remove last node
-//8. deleteAtPosition(index) – remove node at a specific index
+        Node<T> current = head;
+        int i = 0;
+        while (current != null && i < index) {
+            current = current.next;
+            i++;
+        }
+
+        if (current == null) {
+            throw new IndexOutOfBoundsException("index out of bounds");
+        }
+
+        Node<T> prevNode = current.prev;
+        Node<T> nextNode = current.next;
+
+        if (prevNode != null) {
+            prevNode.next = nextNode;
+        } else {
+            head = nextNode; // deleting head
+        }
+
+        if (nextNode != null) {
+            nextNode.prev = prevNode;
+        } else {
+            tail = prevNode; // deleting tail
+        }
+    }
 //9. deleteByValue(value) – remove first node matching a value
-//10. deleteNode(node) – remove a given node reference
+public void deleteNode(Node<T> node) {
+        if (node == null) {
+            throw new IllegalArgumentException("node cannot be null");
+        }
+
+        Node<T> prevNode = node.prev;
+        Node<T> nextNode = node.next;
+
+        if (prevNode != null) {
+            prevNode.next = nextNode;
+        } else {
+            head = nextNode; // node was head
+        }
+
+        if (nextNode != null) {
+            nextNode.prev = prevNode;
+        } else {
+            tail = prevNode; // node was tail
+        }
+
+        // help GC / avoid dangling references
+        node.next = null;
+        node.prev = null;
+    }
 //
 //            Traversal
 //11. traverseForward() – print/iterate from head to tail
@@ -160,9 +219,43 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 //            Utility
 //16. isEmpty() – check if list has zero nodes
 //17. size() / length() – count of nodes
-//18. reverse() – reverse the list in place
+public void reverse() {
+    Node<T> prev = null;
+    Node<T> current = head;
+    tail = head; // old head becomes new tail
+
+    while (current != null) {
+        Node<T> nextNode = current.next;
+        current.next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    head = prev; // old tail (last non-null prev) becomes new head
+}
+    public int size() {
+        int count = 0;
+        Node<T> current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
 //19. clear() – remove all nodes
-//20. toArray() – convert list to array/list structure
+@SuppressWarnings("unchecked")
+public T[] toArray() {
+    Object[] result = new Object[size()];
+    Node<T> current = head;
+    int i = 0;
+
+    while (current != null) {
+        result[i++] = current.data;
+        current = current.next;
+    }
+    return (T[]) result;
+}
 //
 //    Bonus (often included too)
 //
