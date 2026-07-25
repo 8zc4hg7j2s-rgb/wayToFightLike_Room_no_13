@@ -8,5 +8,6 @@ public class CustomMapTesting {
         bucket.put(1, 1);
         bucket.put(11, 2);
         bucket.put(21, 3);
+        bucket.printAll();
     }
 }
