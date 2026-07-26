@@ -1,4 +1,4 @@
-package nitin.gupta.room.no13.coreJavaPrectise;
+package nitin.gupta.room.no13.newChallenge;
 
 import nitin.gupta.room.no13.utils.CsvReader;
 import nitin.gupta.room.no13.utils.Person;
@@ -14,16 +14,61 @@ public class InterviewQuestions {
 //        int[] array = {-3, -1, -5, 7, 4, 3, 2, 9};
 //        int[][] twoDimensionArray = {{1, 3, 6, 9}, {-1, -3, 11, -12}, {12, 34, -2, 17}};
 //        int[] array2 = {2, 4, 6, 8};
-        List<Person> list = CsvReader.readPeopleCsv();
+        //List<Person> list = CsvReader.readPeopleCsv();
        /// mapDeptmentWiseList(list );
-        List<List<Person>> batches =rangeWiseList(list,10);
-        for (List<Person> batch : batches) {
-            System.out.println(Arrays.toString(batch.toArray()));
+        //        List<List<Person>> batches =rangeWiseList(list,10);
+        //        for (List<Person> batch : batches) {
+        //            System.out.println(Arrays.toString(batch.toArray()));
+        //        }
+        //checkString();
+        findOutAllPrimeNumberBetween1To100();
+
+
+
+    }
+
+    private static void findOutAllPrimeNumberBetween1To100() {
+        IntStream.rangeClosed(1, 100).filter(number ->isPrimeNumber(number)).map(Integer::valueOf).forEach(i ->System.out.print(" "+i));
+    }
+
+    static public boolean isPrimeNumber(int number){
+        int sqrtval =(int)Math.sqrt(number);
+        for (int i = 2; i <=sqrtval; i++) {
+            if(number%i==0){
+                return false;
+            }
         }
+        return true;
+    }
 
+    private static void checkString() {
+        String s1 = new String("abc");
+        String s2 = new String("abc");
+        System.out.println(s1==s2);
+        String s3= "abc";
+        System.out.println(s1==s3);
+        String s4= "abc";
+        System.out.println(s3==s4);
+        s4= s1;
+        System.out.println(s3==s4);
+    }
 
+    public List<Person> comparatorDifferentContext(List<Person> personList){
+        return personList.stream()
+                .sorted(Comparator
+                .comparing(Person::department)
+                .thenComparing(Person::department, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(Person::userId, Comparator.nullsLast(Comparator.naturalOrder())))
+                .collect(Collectors.toList());
 
+    }
 
+    public static <T> List<List<T>> partition(List<T> list, int size) {
+        List<List<T>> result = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += size) {
+            result.add(list.subList(i, Math.min(i + size, list.size())));
+        }
+        return result;
     }
 
     private static List<List<Person>> rangeWiseList(List<Person> list , int size) {
