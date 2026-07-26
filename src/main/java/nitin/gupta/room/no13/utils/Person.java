@@ -1,5 +1,6 @@
 package nitin.gupta.room.no13.utils;
 
+import javax.swing.*;
 import java.time.LocalDate;
 
 public record Person(
@@ -11,5 +12,6 @@ public record Person(
         String email,
         String phone,
         LocalDate dateOfBirth,
-        String jobTitle
+        String jobTitle,
+        String department
 ) {}

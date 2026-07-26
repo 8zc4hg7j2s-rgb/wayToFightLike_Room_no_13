@@ -40,7 +40,8 @@ public class CsvReader {
                 cleanField(fields[5]),
                 cleanField(fields[6]),
                 LocalDate.parse(cleanField(fields[7])),
-                cleanField(fields[8])
+                cleanField(fields[8]),
+                cleanField(fields[9])
         );
     }
 
