@@ -11,26 +11,16 @@ import java.util.stream.IntStream;
 
 public class InterviewQuestions {
     static void main() throws IOException, URISyntaxException {
-//        int[] array = {-3, -1, -5, 7, 4, 3, 2, 9};
-//        int[][] twoDimensionArray = {{1, 3, 6, 9}, {-1, -3, 11, -12}, {12, 34, -2, 17}};
-//        int[] array2 = {2, 4, 6, 8};
-        //List<Person> list = CsvReader.readPeopleCsv();
-       /// mapDeptmentWiseList(list );
-        //        List<List<Person>> batches =rangeWiseList(list,10);
-        //        for (List<Person> batch : batches) {
-        //            System.out.println(Arrays.toString(batch.toArray()));
-        //        }
-        //checkString();
-        findOutAllPrimeNumberBetween1To100();
-
-
+        String input = "abcdefgh";
+        System.out.println(reverseStringUsingRecursion(input));
 
     }
-
+    public static String reverseStringUsingRecursion(String str){
+        return !str.equals("") ? reverseStringUsingRecursion(str.substring(1)) + str.charAt(0) : str;
+    }
     private static void findOutAllPrimeNumberBetween1To100() {
         IntStream.rangeClosed(1, 100).filter(number ->isPrimeNumber(number)).map(Integer::valueOf).forEach(i ->System.out.print(" "+i));
     }
-
     static public boolean isPrimeNumber(int number){
         int sqrtval =(int)Math.sqrt(number);
         for (int i = 2; i <=sqrtval; i++) {

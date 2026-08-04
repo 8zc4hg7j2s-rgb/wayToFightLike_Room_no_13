@@ -4,6 +4,28 @@ public class RemoveConsecutiveVowelsFromString {
     static void main() {
         String name = "NitinKumarGupta";
         System.out.println("Result:   " + removeConsecutiveVowels(name));
+        String input ="geeks for geeks";
+        getStringRemoveConsecutiveVowels(input);
+
+    }
+
+   static public void getStringRemoveConsecutiveVowels(String input){
+        StringBuilder output= new StringBuilder();
+        boolean flag =false;
+        for (int i = 1; i < input.length(); i++) {
+            String output1 = String.valueOf(input.charAt(i - 1));
+            if(isVowel(input.charAt(i-1))  && isVowel(input.charAt(i)) ){
+                if(!flag)
+                    output.append(output1);
+                flag=true;
+            }else{
+                if(!flag)
+                    output.append(output1);
+                flag=false;
+            }
+        }
+        System.out.println(output);
+
     }
     public static String removeConsecutiveVowels(String str) {
         StringBuilder result = new StringBuilder();
