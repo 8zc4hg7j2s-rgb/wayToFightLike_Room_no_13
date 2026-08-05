@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -93,16 +95,9 @@ public class CsvReader {
         return orders;
     }
 
-    public static Map<Order , List<Product>> generateCombinations(List<Order> orders, List<Product> products) {
-        Map<Integer, Product> productMap = products.stream()
-                .collect(Collectors.toMap(Product::product_id, p -> p));
-        return orders.stream()
-                .filter(item -> productMap.containsKey(item.product_id()))
-                .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        Collectors.mapping(item -> productMap.get(item.product_id())
-                                , Collectors.toList())
-                ));
+    public static Map<Order, List<Product>> generateCombinations(List<Order> orders, List<Product> products) {
+        Map<Integer, Product> productMap = products.stream().collect(Collectors.toMap(Product::product_id, p -> p));
+        return orders.stream().filter(item -> productMap.containsKey(item.product_id())).collect(Collectors.groupingBy(Function.identity(), Collectors.mapping(item -> productMap.get(item.product_id()), Collectors.toList())));
     }
 
     public static Map<Order, List<Product>> getFlatMapOfOrderAndProducts() {
@@ -111,10 +106,80 @@ public class CsvReader {
         return generateCombinations(orders, products);
     }
 
-    static void main() {
-        Map<Order, List<Product>> mapOrders = getFlatMapOfOrderAndProducts();
-        mapOrders.entrySet().stream().forEach(System.out::println);
+    public static List<LeadsDuplicate> getLeadsDuplicateCsv() throws IOException, URISyntaxException {
+        List<LeadsDuplicate> leadsDuplicates = new ArrayList<>();
+        String filePath = "src/main/resources/leads-duplicates-100.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            br.readLine(); // Skip the header row
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                LeadsDuplicate leadsDuplicate = new LeadsDuplicate(Integer.parseInt(values[0].trim()), values[1].trim(), values[2].trim(), values[3].trim(), values[4].trim(), values[5].trim(), values[6].trim(), values[7].trim(), values[8].trim(), values[9].trim(), values[10].trim(), values[11].trim(), values[12].trim(), values[13].trim());
+                leadsDuplicates.add(leadsDuplicate);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading orders file: " + e.getMessage());
+        }
+        return leadsDuplicates;
     }
+
+    public static List<Organization> readOrganizationCsv() throws IOException, URISyntaxException {
+        List<Organization> organizations = new ArrayList<>();
+        String filePath = "src/main/resources/organizations-100.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            br.readLine(); // Skip the header row
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                Organization organization = new Organization(
+                        Integer.parseInt(values[0].trim()),
+                        cleanField(values[1].trim()),
+                        cleanField(values[2].trim()),
+                        cleanField(values[3].trim()),
+                        cleanField(values[4].trim()),
+                        cleanField(values[5].trim()),
+                        cleanField(values[6].trim()),
+                        cleanField(values[7].trim()),
+                        cleanField(values[8].trim()));
+                organizations.add(organization);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading orders file: " + e.getMessage());
+        }
+        return organizations;
+    }
+
+    public static List<OrganizationDuplicates> readOrganizationDuplicatesCsv() throws IOException, URISyntaxException {
+        List<OrganizationDuplicates> organizationDuplicates = new ArrayList<>();
+        String filePath = "src/main/resources/organizations-duplicates-100.csv";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            br.readLine(); // Skip the header row
+
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                OrganizationDuplicates organization = new OrganizationDuplicates(
+                        Integer.parseInt(values[0].trim()),
+                        cleanField(values[1].trim()),
+                        cleanField(values[2].trim()),
+                        cleanField(values[3].trim()),
+                        cleanField(values[4].trim()),
+                        cleanField(values[5].trim()),
+                        cleanField(values[6].trim()),
+                        cleanField(values[7].trim()),
+                        cleanField(values[8].trim()),
+                        LocalDateTime.parse(values[9].trim() ,formatter));
+                organizationDuplicates.add(organization);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading orders file: " + e.getMessage());
+        }
+        return organizationDuplicates;
+    }
+
 }
 
 
