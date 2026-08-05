@@ -1,10 +1,10 @@
 package nitin.gupta.room.no13.datastructure.sort;
 
 public class DuelPivotQuickSort {
-    private static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    private static void swap(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
     }
 
     public static void sort(int[] arr) {
