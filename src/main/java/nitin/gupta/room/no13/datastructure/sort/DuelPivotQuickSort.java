@@ -1,8 +1,11 @@
-package nitin.gupta.room.no13.coreJavaPrectise.sort;
+package nitin.gupta.room.no13.datastructure.sort;
 
-import java.util.Arrays;
-
-public class DualPivotQuickSort {
+public class DuelPivotQuickSort {
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 
     public static void sort(int[] arr) {
         if (arr == null || arr.length == 0) {
@@ -10,17 +13,14 @@ public class DualPivotQuickSort {
         }
         dualPivotQuicksort(arr, 0, arr.length - 1);
     }
-
-    private static void dualPivotQuicksort(int[] arr, int low, int high) {
+    public static void dualPivotQuicksort(int[] arr, int low, int high) {
         if (low >= high) {
             return;
         }
-
         // 1. Ensure left pivot is smaller than or equal to right pivot
         if (arr[low] > arr[high]) {
-            swap(arr, low, high);
+            swap(arr , low, high);
         }
-
         int pivot1 = arr[low];
         int pivot2 = arr[high];
 
@@ -50,18 +50,8 @@ public class DualPivotQuickSort {
         dualPivotQuicksort(arr, gt + 1, high);
     }
 
-    private static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
-    public static void main(String[] args) {
+    static void main() {
         int[] data = {24, 8, -42, 75, -24, 2, 16, 60, 31, 10};
-        System.out.println("Original array: " + Arrays.toString(data));
-
         sort(data);
-
-        System.out.println("Sorted array:   " + Arrays.toString(data));
     }
 }
