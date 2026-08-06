@@ -1,20 +1,19 @@
 package nitin.gupta.room.no13.newChallenge;
 
 import nitin.gupta.room.no13.utils.CsvReader;
+import nitin.gupta.room.no13.utils.Employee;
 import nitin.gupta.room.no13.utils.Person;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InterviewQuestions {
-    static void main() throws IOException, URISyntaxException {
-        String input = "abcdefgh";
-        System.out.println(reverseStringUsingRecursion(input));
 
-    }
     public static String reverseStringUsingRecursion(String str){
         return !str.equals("") ? reverseStringUsingRecursion(str.substring(1)) + str.charAt(0) : str;
     }
@@ -126,5 +125,68 @@ public class InterviewQuestions {
             combinationOf18Sum(array, subSet, powerSet, i + 1);
             subSet.remove(subSet.size() - 1);
         }
+    }
+
+    static public void getKLargeAndSmalllestElementFromArray(){
+        int[] array = {8,-8,10,4,-6,9,-9,12,55,-30,2,5,6};
+        int k=2;
+        int smallest=Arrays.stream(array).boxed().sorted().findFirst().orElseGet(()->Integer.MIN_VALUE);
+        int largest=Arrays.stream(array).boxed().sorted(Collections.reverseOrder(Integer::compareTo)).skip(k-1).findFirst().orElseGet(() -> Integer.MAX_VALUE);
+        System.out.println(smallest +" "+largest);
+    }
+
+    private static void top3Employees() throws IOException, URISyntaxException {
+        List<Employee> employes = CsvReader.readEmployeeCsv();
+        List<List<Employee>> salaryEmp = employes.stream()
+                .collect(Collectors.groupingBy(Employee::department))
+                .entrySet()
+                .stream()
+                .map(emp -> emp.getValue().stream().sorted(Comparator.comparing(Employee::salary_inr))
+                        .limit(3).collect(Collectors.toUnmodifiableList()))
+                .collect(Collectors.toList());
+        for (List<Employee> employees : salaryEmp) {
+             for (Employee employee : employees) {
+                 System.out.println(employee);
+             }
+        }
+    }
+
+    /**
+     * input  List<Integer> list = Arrays.asList(2,3,2,2,5,5,6,5,7,5,3,1);
+     * output  555522233671
+     */
+    public static void getMaxOccuranceIntegerFirst(){
+        List<Integer> list = Arrays.asList(2,3,2,2,5,5,6,5,7,5,3,1);
+        list.stream()
+                .collect(Collectors.groupingBy(Function.identity(),
+                        LinkedHashMap::new, Collectors.counting())) ///Map<5 ,4>
+                .entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .forEach(e ->{
+                    for (int i = 0; i < e.getValue(); i++) {
+                        System.out.print(e.getKey());
+                    }
+                });
+    }
+    public static void FirstNonRepeatingCharacter(){
+        String  str= "jksfhkqshfqwuaieqfqiwj";
+        Consumer<Character> callback = a -> System.out.println(a);
+        Optional<Character> charaaaa = str.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream().filter(e -> e.getValue() == 1L)
+                .map(entry -> entry.getKey()).findFirst().map(c -> {
+                    callback.accept(c);
+                    return c;
+                });
+    }
+    static void main() throws IOException, URISyntaxException {
+//        String input = "abcdefgh";
+//        System.out.println(reverseStringUsingRecursion(input));
+        //top3Employees();
+        // getKLargeAndSmalllestElementFromArray();
+       // getMaxOccuranceIntegerFirst();
+        FirstNonRepeatingCharacter();
+
     }
 }
