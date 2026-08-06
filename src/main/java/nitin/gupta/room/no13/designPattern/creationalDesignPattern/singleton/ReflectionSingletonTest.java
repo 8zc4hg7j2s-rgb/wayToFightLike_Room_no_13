@@ -1,4 +1,4 @@
-package nitin.gupta.room.no13.designPattern.singletonDesignPattern;
+package nitin.gupta.room.no13.designPattern.creationalDesignPattern.singleton;
 
 import java.lang.reflect.Constructor;
 
