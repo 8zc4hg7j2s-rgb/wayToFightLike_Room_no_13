@@ -101,15 +101,21 @@ interface DiscountStrategy {
 }
 
 class RegularCustomerDiscount implements DiscountStrategy {
-    public double applyDiscount(double amount) { return amount * 0.95; }
+    public double applyDiscount(double amount) {
+        return amount * 0.95;
+    }
 }
 
 class PremiumCustomerDiscount implements DiscountStrategy {
-    public double applyDiscount(double amount) { return amount * 0.90; }
+    public double applyDiscount(double amount) {
+        return amount * 0.90;
+    }
 }
 
 class VipCustomerDiscount implements DiscountStrategy {
-    public double applyDiscount(double amount) { return amount * 0.80; }
+    public double applyDiscount(double amount) {
+        return amount * 0.80;
+    }
 }
 
 class DiscountCalculator {
@@ -161,12 +167,19 @@ interface FlyingBird extends Bird {
 }
 
 class Sparrow implements FlyingBird {
-    public void eat() { System.out.println("Sparrow eating..."); }
-    public void fly() { System.out.println("Sparrow flying..."); }
+    public void eat() {
+        System.out.println("Sparrow eating...");
+    }
+
+    public void fly() {
+        System.out.println("Sparrow flying...");
+    }
 }
 
 class Ostrich implements Bird {
-    public void eat() { System.out.println("Ostrich eating..."); }
+    public void eat() {
+        System.out.println("Ostrich eating...");
+    }
     // No fly() method — no broken contract
 }
 ```
@@ -187,17 +200,26 @@ Prefer several small, specific interfaces over one large, general-purpose interf
 ```java
 interface Worker {
     void work();
+
     void eat();
 }
 
 class HumanWorker implements Worker {
-    public void work() { System.out.println("Human working..."); }
-    public void eat() { System.out.println("Human eating..."); }
+    public void work() {
+        System.out.println("Human working...");
+    }
+
+    public void eat() {
+        System.out.println("Human eating...");
+    }
 }
 
 // Forced to implement eat(), which makes no sense for a robot
 class RobotWorker implements Worker {
-    public void work() { System.out.println("Robot working..."); }
+    public void work() {
+        System.out.println("Robot working...");
+    }
+
     public void eat() {
         throw new UnsupportedOperationException("Robots don't eat!");
     }
@@ -216,12 +238,19 @@ interface Eatable {
 }
 
 class HumanWorker implements Workable, Eatable {
-    public void work() { System.out.println("Human working..."); }
-    public void eat() { System.out.println("Human eating..."); }
+    public void work() {
+        System.out.println("Human working...");
+    }
+
+    public void eat() {
+        System.out.println("Human eating...");
+    }
 }
 
 class RobotWorker implements Workable {
-    public void work() { System.out.println("Robot working..."); }
+    public void work() {
+        System.out.println("Robot working...");
+    }
     // No eat() method needed
 }
 ```
@@ -287,7 +316,9 @@ class UserService {
 
 // Usage
 UserService service = new UserService(new MongoDatabase());
-service.saveUser("Alice");
+service.
+
+saveUser("Alice");
 ```
 
 `UserService` now depends only on the `Database` interface. Swapping databases requires no changes to `UserService`

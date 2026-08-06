@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 public class CustomMapPr1<K extends Comparable<K>, V> {
     private final int size;
     private transient Entry<K, V>[] table;
+
     public CustomMapPr1(int size) {
         this.size = size;
         table = new Entry[size];

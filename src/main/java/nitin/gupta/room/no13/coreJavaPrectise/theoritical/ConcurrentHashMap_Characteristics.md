@@ -79,7 +79,7 @@ Actions in one thread **happen-before** subsequent successful retrievals of the 
 Example:
 
 ```java
-map.put("id", 100);
+map.put("id",100);
 ```
 
 A later successful `map.get("id")` in another thread is guaranteed to see the updated value.
@@ -104,11 +104,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
 
-map.put("A", 1);
+map.
 
-map.compute("A", (k, v) -> v == null ? 1 : v + 1);
+put("A",1);
 
-System.out.println(map.get("A")); // 2
+map.
+
+compute("A",(k, v) ->v ==null?1:v +1);
+
+        System.out.
+
+println(map.get("A")); // 2
 ```
 
 ---
@@ -116,8 +122,10 @@ System.out.println(map.get("A")); // 2
 ## Iteration Example
 
 ```java
-map.forEach((k, v) -> {
-    System.out.println(k + " = " + v);
+map.forEach((k, v) ->{
+        System.out.
+
+println(k +" = "+v);
 });
 ```
 

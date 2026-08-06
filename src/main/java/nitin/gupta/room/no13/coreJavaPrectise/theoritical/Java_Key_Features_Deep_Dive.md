@@ -37,8 +37,8 @@ if later elements would also pass. This is different from `filter()`, which chec
 List<Integer> numbers = List.of(1, 2, 3, 4, 5, 1, 2);
 
 List<Integer> result = numbers.stream()
-    .takeWhile(n -> n < 4)
-    .collect(Collectors.toList());
+        .takeWhile(n -> n < 4)
+        .collect(Collectors.toList());
 // Result: [1, 2, 3]  -- stops at 4, ignores the trailing 1, 2 even though they're < 4
 ```
 
@@ -52,8 +52,8 @@ the predicate first fails.
 
 ```java
 List<Integer> result = numbers.stream()
-    .dropWhile(n -> n < 4)
-    .collect(Collectors.toList());
+        .dropWhile(n -> n < 4)
+        .collect(Collectors.toList());
 // Result: [4, 5, 1, 2]  -- drops leading 1,2,3, keeps the rest as-is
 ```
 
@@ -64,11 +64,19 @@ Java 9 added a version with a built-in **has-next** condition, similar to a clas
 
 ```java
 // Java 8 style — needs limit() or it never terminates
-Stream.iterate(1, n -> n * 2).limit(5).forEach(System.out::println);
+Stream.iterate(1,n ->n *2).
+
+limit(5).
+
+forEach(System.out::println);
 
 // Java 9 style — self-terminating, reads like: for (int i=1; i<50; i *= 2)
-Stream.iterate(1, n -> n < 50, n -> n * 2)
-      .forEach(System.out::println);
+Stream.
+
+iterate(1,n ->n< 50,n ->n *2)
+        .
+
+forEach(System.out::println);
 // Output: 1 2 4 8 16 32
 ```
 
@@ -88,8 +96,8 @@ Stream<String> s = Stream.ofNullable(value);
 
 // Practical use: flatMap over a collection of possibly-null values
 List<String> results = rawList.stream()
-    .flatMap(v -> Stream.ofNullable(v))
-    .collect(Collectors.toList());
+        .flatMap(v -> Stream.ofNullable(v))
+        .collect(Collectors.toList());
 ```
 
 **Why it matters:** These four additions removed common boilerplate/workarounds and made Streams more expressive for
@@ -115,8 +123,14 @@ public final class Point {
         this.x = x;
         this.y = y;
     }
-    public int getX() { return x; }
-    public int getY() { return y; }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -125,10 +139,16 @@ public final class Point {
         Point p = (Point) o;
         return x == p.x && y == p.y;
     }
+
     @Override
-    public int hashCode() { return Objects.hash(x, y); }
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
     @Override
-    public String toString() { return "Point[x=" + x + ", y=" + y + "]"; }
+    public String toString() {
+        return "Point[x=" + x + ", y=" + y + "]";
+    }
 }
 ```
 
@@ -137,7 +157,8 @@ public final class Point {
 ### After Records
 
 ```java
-record Point(int x, int y) { }
+record Point(int x, int y) {
+}
 ```
 
 **One line.** The compiler automatically generates:
@@ -165,8 +186,13 @@ You can also add extra methods, static fields, and static factory methods:
 
 ```java
 record Range(int start, int end) {
-    static Range of(int start, int end) { return new Range(start, end); }
-    int length() { return end - start; }
+    static Range of(int start, int end) {
+        return new Range(start, end);
+    }
+
+    int length() {
+        return end - start;
+    }
 }
 ```
 
@@ -185,36 +211,49 @@ Eliminates the redundant cast that traditionally followed an `instanceof` check.
 ### Before
 
 ```java
-if (obj instanceof String) {
-    String s = (String) obj;   // manual, redundant cast
-    System.out.println(s.length());
-}
+if(obj instanceof String){
+String s = (String) obj;   // manual, redundant cast
+    System.out.
+
+println(s.length());
+        }
 ```
 
 ### After
 
 ```java
-if (obj instanceof String s) {   // 's' is automatically bound and cast
-    System.out.println(s.length());
-}
+if(obj instanceof
+String s){   // 's' is automatically bound and cast
+        System.out.
+
+println(s.length());
+        }
 ```
 
 The pattern variable `s` is only in scope where the compiler can prove `obj` is definitely a `String` — including in
 flow-sensitive contexts:
 
 ```java
-if (!(obj instanceof String s)) {
-    return;
-}
+if(!(obj instanceof
+String s)){
+        return;
+        }
 // 's' is still usable here, because if we reach this line, obj WAS a String
-System.out.println(s.length());
+        System.out.
+
+println(s.length());
 ```
 
 You can also combine the pattern with further boolean logic:
 
 ```java
-if (obj instanceof String s && s.length() > 5) {
-    System.out.println("Long string: " + s);
+if(obj instanceof
+String s &&s.
+
+length() >5){
+        System.out.
+
+println("Long string: "+s);
 }
 ```
 
@@ -234,18 +273,18 @@ produces a value — with a safer, more concise syntax.
 
 ```java
 int numLetters;
-switch (day) {
-    case MONDAY:
-    case FRIDAY:
-    case SUNDAY:
-        numLetters = 6;
+switch(day){
+        case MONDAY:
+        case FRIDAY:
+        case SUNDAY:
+numLetters =6;
         break;
-    case TUESDAY:
-        numLetters = 7;
+        case TUESDAY:
+numLetters =7;
         break;
-    default:
-        numLetters = 0;
-}
+default:
+numLetters =0;
+        }
 ```
 
 Problems: verbose, `break` is easy to forget (fall-through bugs), and it can't be assigned directly to a variable.
@@ -255,8 +294,8 @@ Problems: verbose, `break` is easy to forget (fall-through bugs), and it can't b
 ```java
 int numLetters = switch (day) {
     case MONDAY, FRIDAY, SUNDAY -> 6;
-    case TUESDAY                -> 7;
-    default                     -> 0;
+    case TUESDAY -> 7;
+    default -> 0;
 };
 ```
 
@@ -294,20 +333,20 @@ etc.
 
 ```java
 String json = "{\n" +
-              "  \"name\": \"John\",\n" +
-              "  \"age\": 30\n" +
-              "}\n";
+        "  \"name\": \"John\",\n" +
+        "  \"age\": 30\n" +
+        "}\n";
 ```
 
 ### After
 
 ```java
 String json = """
-    {
-      "name": "John",
-      "age": 30
-    }
-    """;
+        {
+          "name": "John",
+          "age": 30
+        }
+        """;
 ```
 
 - Delimited by triple double-quotes (`"""`).
@@ -319,12 +358,12 @@ String json = """
 
 ```java
 String html = """
-    <html>
-        <body>
-            <p>Hello, World!</p>
-        </body>
-    </html>
-    """;
+        <html>
+            <body>
+                <p>Hello, World!</p>
+            </body>
+        </html>
+        """;
 ```
 
 **Why it matters:** Massively improves readability for embedded structured text (SQL queries, JSON payloads, HTML
@@ -344,16 +383,23 @@ you the safety of a "closed" type hierarchy, something Java previously couldn't 
 
 ```java
 public sealed interface Shape
-    permits Circle, Square, Triangle { }
+        permits Circle, Square, Triangle {
+}
 
 public final class Circle implements Shape {
     public final double radius;
-    public Circle(double radius) { this.radius = radius; }
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
 }
 
 public final class Square implements Shape {
     public final double side;
-    public Square(double side) { this.side = side; }
+
+    public Square(double side) {
+        this.side = side;
+    }
 }
 
 public non-sealed class Triangle implements Shape {
@@ -374,8 +420,8 @@ knows the *complete* list of possible subtypes at compile time:
 
 ```java
 double area = switch (shape) {
-    case Circle c   -> Math.PI * c.radius * c.radius;
-    case Square s   -> s.side * s.side;
+    case Circle c -> Math.PI * c.radius * c.radius;
+    case Square s -> s.side * s.side;
     case Triangle t -> 0.5 * t.base * t.height;
     // no 'default' needed -- compiler knows these are the ONLY possibilities
 };
@@ -481,8 +527,8 @@ write plain old blocking, sequential code.
 ```java
 // Creating a single virtual thread directly
 Thread vt = Thread.ofVirtual().start(() -> {
-    System.out.println("Running in: " + Thread.currentThread());
-});
+            System.out.println("Running in: " + Thread.currentThread());
+        });
 ```
 
 **Why it matters:** Lets developers write simple, blocking, imperative-style code (easy to read, debug, and profile)
@@ -507,16 +553,22 @@ unless you manually track and cancel them — a common source of resource leaks 
 ### Example
 
 ```java
-try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-    Future<String> user  = scope.fork(() -> fetchUser());
-    Future<String> order = scope.fork(() -> fetchOrder());
+try(var scope = new StructuredTaskScope.ShutdownOnFailure()){
+Future<String> user = scope.fork(() -> fetchUser());
+Future<String> order = scope.fork(() -> fetchOrder());
 
-    scope.join();           // wait for both subtasks
-    scope.throwIfFailed();  // propagate any exception
+    scope.
 
-    // Both succeeded — safe to use results
-    process(user.resultNow(), order.resultNow());
-}
+join();           // wait for both subtasks
+    scope.
+
+throwIfFailed();  // propagate any exception
+
+// Both succeeded — safe to use results
+process(user.resultNow(),order.
+
+resultNow());
+        }
 // If EITHER subtask fails, the other is automatically cancelled,
 // and the scope's owner thread gets the exception -- no orphaned threads.
 ```
@@ -574,8 +626,8 @@ intermediate ops (`map`, `filter`, `sorted`, etc.); Gatherers let you write your
 
 ```java
 List<List<Integer>> windows = Stream.of(1, 2, 3, 4, 5)
-    .gather(Gatherers.windowSliding(2))
-    .toList();
+        .gather(Gatherers.windowSliding(2))
+        .toList();
 // Result: [[1, 2], [2, 3], [3, 4], [4, 5]]
 ```
 
@@ -583,8 +635,8 @@ List<List<Integer>> windows = Stream.of(1, 2, 3, 4, 5)
 
 ```java
 Optional<String> concatenated = Stream.of("a", "b", "c")
-    .gather(Gatherers.fold(() -> "", (acc, elem) -> acc + elem))
-    .findFirst();
+        .gather(Gatherers.fold(() -> "", (acc, elem) -> acc + elem))
+        .findFirst();
 // Result: Optional["abc"]
 ```
 
@@ -593,17 +645,17 @@ Optional<String> concatenated = Stream.of("a", "b", "c")
 ```java
 // A gatherer that only emits every 2nd element
 Gatherer<Integer, ?, Integer> everyOther = Gatherer.ofSequential(
-    () -> new int[]{0},                          // initializer (state)
-    (state, element, downstream) -> {             // integrator
-        state[0]++;
-        if (state[0] % 2 == 0) downstream.push(element);
-        return true;
-    }
-);
+                () -> new int[]{0},                          // initializer (state)
+                (state, element, downstream) -> {             // integrator
+                    state[0]++;
+                    if (state[0] % 2 == 0) downstream.push(element);
+                    return true;
+                }
+        );
 
 List<Integer> result = Stream.of(1, 2, 3, 4, 5, 6)
-    .gather(everyOther)
-    .toList();
+        .gather(everyOther)
+        .toList();
 // Result: [2, 4, 6]
 ```
 
@@ -673,7 +725,7 @@ final static ScopedValue<String> REQUEST_ID = ScopedValue.newInstance();
 void handleRequest(String id) throws Exception {
     ScopedValue.where(REQUEST_ID, id).run(() -> {
         try (var scope = new StructuredTaskScope.ShutdownOnFailure()) {
-            var userTask  = scope.fork(() -> fetchUser(REQUEST_ID.get()));
+            var userTask = scope.fork(() -> fetchUser(REQUEST_ID.get()));
             var orderTask = scope.fork(() -> fetchOrder(REQUEST_ID.get()));
             scope.join().throwIfFailed();
             combine(userTask.resultNow(), orderTask.resultNow());
@@ -711,19 +763,26 @@ import java.nio.file.*;
 
 ClassModel classModel = ClassFile.of().parse(Path.of("MyClass.class"));
 
-for (MethodModel method : classModel.methods()) {
-    System.out.println("Method: " + method.methodName().stringValue());
-}
+for(
+MethodModel method :classModel.
+
+methods()){
+        System.out.
+
+println("Method: "+method.methodName().
+
+stringValue());
+        }
 ```
 
 ### Example: transforming a class file
 
 ```java
 byte[] transformedBytes = ClassFile.of().transformClass(classModel,
-    ClassTransform.transformingMethods(
-        methodTransform -> true, // apply to all methods
-        MethodTransform.dropping(codeElement -> false) // example filter
-    )
+        ClassTransform.transformingMethods(
+                methodTransform -> true, // apply to all methods
+                MethodTransform.dropping(codeElement -> false) // example filter
+        )
 );
 ```
 

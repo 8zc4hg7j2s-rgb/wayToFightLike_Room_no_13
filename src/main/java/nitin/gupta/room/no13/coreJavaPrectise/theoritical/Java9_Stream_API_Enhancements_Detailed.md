@@ -22,10 +22,12 @@ It works best on **ordered streams**.
 List<Integer> numbers = List.of(1, 2, 3, 4, 0, 5, 6);
 
 List<Integer> result = numbers.stream()
-    .takeWhile(n -> n > 0)
-    .toList();
+        .takeWhile(n -> n > 0)
+        .toList();
 
-System.out.println(result);
+System.out.
+
+println(result);
 ```
 
 **Output**
@@ -38,9 +40,12 @@ System.out.println(result);
 
 ```java
 List<Integer> result = new ArrayList<>();
-for (int n : numbers) {
-    if (n <= 0) break;
-    result.add(n);
+for(
+int n :numbers){
+        if(n <=0)break;
+        result.
+
+add(n);
 }
 ```
 
@@ -61,11 +66,11 @@ for (int n : numbers) {
 ### Example
 
 ```java
-List<Integer> numbers = List.of(1,2,3,4,0,5,6);
+List<Integer> numbers = List.of(1, 2, 3, 4, 0, 5, 6);
 
 List<Integer> result = numbers.stream()
-    .dropWhile(n -> n > 0)
-    .toList();
+        .dropWhile(n -> n > 0)
+        .toList();
 ```
 
 **Output**
@@ -89,7 +94,7 @@ List<Integer> result = numbers.stream()
 Java 8:
 
 ```java
-Stream.iterate(1, n -> n + 1)
+Stream.iterate(1,n ->n +1)
 ```
 
 creates an **infinite stream**.
@@ -106,9 +111,11 @@ Stream.iterate(seed, predicate, nextFunction)
 
 ```java
 Stream<Integer> stream =
-    Stream.iterate(1, n -> n <= 10, n -> n + 1);
+        Stream.iterate(1, n -> n <= 10, n -> n + 1);
 
-stream.forEach(System.out::println);
+stream.
+
+forEach(System.out::println);
 ```
 
 **Output**
@@ -144,7 +151,9 @@ Creates a stream containing one element if the value is non-null; otherwise it c
 
 ```java
 Stream.ofNullable("Java")
-      .forEach(System.out::println);
+      .
+
+forEach(System.out::println);
 ```
 
 Output
@@ -157,7 +166,9 @@ Java
 
 ```java
 Stream.ofNullable(null)
-      .forEach(System.out::println);
+      .
+
+forEach(System.out::println);
 ```
 
 Output
@@ -169,10 +180,14 @@ Output
 ### Before Java 9
 
 ```java
-if (value != null) {
-    Stream.of(value);
-} else {
-    Stream.empty();
+if(value !=null){
+        Stream.
+
+of(value);
+}else{
+        Stream.
+
+empty();
 }
 ```
 
