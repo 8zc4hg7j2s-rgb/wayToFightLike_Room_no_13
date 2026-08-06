@@ -199,6 +199,52 @@ public class InterviewQuestions {
         arr[start] = arr[end];
         arr[end] = temp;
     }
+    public static int findMaxSubarraySum(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException("Array must not be null or empty");
+        }
+
+        int maxSoFar = nums[0];
+        int currentMax = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            currentMax = Math.max(nums[i], currentMax + nums[i]);
+            maxSoFar = Math.max(maxSoFar, currentMax);
+        }
+
+        return maxSoFar;
+    }
+
+    public static void findoutFirstLongestConsucativeArray(int[] arr) {
+        if (arr == null || arr.length == 0) return;
+        int maxLen = 0;
+        int currentLen = 0;
+        int bestStartIndex = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                currentLen++;
+                // Strictly greater (>) ensures we pick the FIRST longest sequence in case of ties
+                if (currentLen > maxLen) {
+                    maxLen = currentLen;
+                    bestStartIndex = i - currentLen + 1;
+                }
+            } else {
+                currentLen = 0;
+            }
+        }
+
+        // Print result details
+        System.out.println("Longest consecutive 1s length: " + maxLen);
+        System.out.println("Starts at index: " + bestStartIndex + ", Ends at index: " + (bestStartIndex + maxLen - 1));
+
+        System.out.print("Subarray: [");
+        for (int i = 0; i < maxLen; i++) {
+            System.out.print(arr[bestStartIndex + i] +" ");
+        }
+        System.out.println("]");
+    }
+
     static void main() throws IOException, URISyntaxException {
 //        String input = "abcdefgh";
 //        System.out.println(reverseStringUsingRecursion(input));
@@ -206,8 +252,12 @@ public class InterviewQuestions {
         // getKLargeAndSmalllestElementFromArray();
        // getMaxOccuranceIntegerFirst();
        // FirstNonRepeatingCharacter();
-        int[] array = new int[]{2, 1, 2, 2, 0, 1, 2, 0, 2, 1, 1, 2, 1, 0, 1, 0};
-        DutchFlagProblem(array);
-        System.out.println(Arrays.toString(array));
+       // int[] array = new int[]{2, 1, 2, 2, 0, 1, 2, 0, 2, 1, 1, 2, 1, 0, 1, 0};
+      ///  DutchFlagProblem(array);
+       // System.out.println(Arrays.toString(array));
+      //  int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        ///System.out.println(findMaxSubarraySum(nums));
+        int[] intarray = {0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1};
+        findoutFirstLongestConsucativeArray(intarray);
     }
 }
