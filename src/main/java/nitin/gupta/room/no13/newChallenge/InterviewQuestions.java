@@ -180,13 +180,34 @@ public class InterviewQuestions {
                     return c;
                 });
     }
+
+    public static void DutchFlagProblem(int[] array){
+        int i=0 ,j=0, k=array.length-1;
+        while(j<=k){
+            if(array[j] < 1){
+                swap(array,j++,i++);
+            } else if (array[j] >1) {
+                swap(array,j,k--);
+            }else{
+                j++;
+            }
+        }
+    }
+
+    private static void swap(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+    }
     static void main() throws IOException, URISyntaxException {
 //        String input = "abcdefgh";
 //        System.out.println(reverseStringUsingRecursion(input));
         //top3Employees();
         // getKLargeAndSmalllestElementFromArray();
        // getMaxOccuranceIntegerFirst();
-        FirstNonRepeatingCharacter();
-
+       // FirstNonRepeatingCharacter();
+        int[] array = new int[]{2, 1, 2, 2, 0, 1, 2, 0, 2, 1, 1, 2, 1, 0, 1, 0};
+        DutchFlagProblem(array);
+        System.out.println(Arrays.toString(array));
     }
 }
