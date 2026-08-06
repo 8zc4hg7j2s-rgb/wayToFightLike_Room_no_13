@@ -8,35 +8,27 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @NoArgsConstructor
-public class PMMPBinarySearchTree <T extends  Comparable<T>> {
+public class PMMPBinarySearchTree<T extends Comparable<T>> {
 
+    int leftcount = 0;
+    int rightCount = 0;
     private Tree<T> root;
-    @ToString
-    @EqualsAndHashCode
-    static class Tree<T extends Comparable<T>> {
-        T data;
-        Tree<T> left;
-        Tree<T> right;
-        Tree<T> parent;
-        public Tree(T data, Tree<T> parent) {
-            this.data = data;
-            this.parent = parent;
-        }
-    }
+
     public void add(T data) {
-        if (root == null) root= new Tree(data, null);
-        else addRec(data ,root);
+        if (root == null) root = new Tree(data, null);
+        else addRec(data, root);
     }
 
     private void addRec(T data, Tree<T> root) {
         if (root.data.compareTo(data) < 0) {
-            if(root.left == null) root.left = new Tree(data, null);
-            else addRec(data , root.left);
-        }else{
-            if(root.right == null) root.right = new Tree(data, null);
-            else addRec(data , root.right);
+            if (root.left == null) root.left = new Tree(data, null);
+            else addRec(data, root.left);
+        } else {
+            if (root.right == null) root.right = new Tree(data, null);
+            else addRec(data, root.right);
         }
     }
+
     public void remove(T data) {
         Tree<T> parent = null;
         Tree<T> current = root;
@@ -91,99 +83,118 @@ public class PMMPBinarySearchTree <T extends  Comparable<T>> {
         }
         return null; // not found
     }
-    int leftcount=0;
-    public Tree<T> findKthSmallest(int k ,Tree<T> tree){
-        if(tree==null) return null;
-        Tree<T> left = findKthSmallest(k ,tree.left);
-        if(left!=null) left=left;
+
+    public Tree<T> findKthSmallest(int k, Tree<T> tree) {
+        if (tree == null) return null;
+        Tree<T> left = findKthSmallest(k, tree.left);
+        if (left != null) left = left;
         leftcount++;
-        if(leftcount==k) return tree;
-        return findKthSmallest(k ,tree.right);
+        if (leftcount == k) return tree;
+        return findKthSmallest(k, tree.right);
     }
 
-    int rightCount=0;
     public Tree<T> findKthLargest(int k, Tree<T> tree) {
-        if(tree==null) return null;
-        Tree<T> right = findKthLargest(k ,tree.right );
-        if(right!=null) right=right;
+        if (tree == null) return null;
+        Tree<T> right = findKthLargest(k, tree.right);
+        if (right != null) right = right;
         rightCount++;
-        if(rightCount==k) return tree;
-        return findKthLargest(k ,tree.left);
+        if (rightCount == k) return tree;
+        return findKthLargest(k, tree.left);
     }
 
-
-
-    public  T minimum(){
+    public T minimum() {
         Tree<T> current = root;
         while (current.left != null) {
             current = current.left;
         }
         return current.data;
     }
-    public T maximum(){
-       Tree<T> current = root;
+
+    public T maximum() {
+        Tree<T> current = root;
         while (current.right != null) {
             current = current.right;
         }
         return current.data;
     }
-    public int height(Tree<T> tree){
+
+    public int height(Tree<T> tree) {
         if (tree == null) {
             return 0;
         }
         return Math.max(height(tree.left), height(tree.right)) + 1;
     }
-    public int count(Tree<T> tree){
+
+    public int count(Tree<T> tree) {
         if (tree == null) {
             return 0;
         }
         return count(tree.left) + count(tree.right) + 1;
     }
+
     //Root ->Left $ -> Right
-    public void preOrder(){
-        if(root == null) return;
+    public void preOrder() {
+        if (root == null) return;
         Tree<T> current = root;
         System.out.println(current.data);
         while (current.left != null) current = current.left;
         while (current.right != null) current = current.right;
     }
+
     //Left->root->Right
-    public void inOrder(){
+    public void inOrder() {
         if (root == null) return;
         Tree<T> current = root;
         while (current.left != null) current = current.left;
         System.out.println(current.data);
         while (current.right != null) current = current.right;
     }
+
     //Left->Right->Root
-    public void postOrder(){
+    public void postOrder() {
         if (root == null) return;
         Tree<T> current = root;
         while (current.left != null) current = current.left;
         while (current.right != null) current = current.right;
         System.out.println(current.data);
     }
-    public void levelOrder(){
+
+    public void levelOrder() {
         if (root == null) return;
         Tree<T> current = root;
         Queue<Tree<T>> queue = new LinkedList<>();
         queue.add(current);
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Tree<T> temp = queue.poll();
             System.out.println(current.data);
             if (temp.left != null) queue.add(temp.left);
             if (temp.right != null) queue.add(temp.right);
         }
     }
-    public void leafLevelOrderTravel(){
+
+    public void leafLevelOrderTravel() {
         if (root == null) return;
         Tree<T> current = root;
-        while (current != null ) {
-            if(current.left == null && current.right == null){
+        while (current != null) {
+            if (current.left == null && current.right == null) {
                 System.out.println(current.data);
             }
-            if(current.left != null)  current = current.left;
-            if(current.right != null)  current = current.right;
+            if (current.left != null) current = current.left;
+            if (current.right != null) current = current.right;
+        }
+    }
+
+    @ToString
+    @EqualsAndHashCode
+    static class Tree<T extends Comparable<T>> {
+        T data;
+        Tree<T> left;
+        Tree<T> right;
+        Tree<T> parent;
+
+        public Tree(T data, Tree<T> parent) {
+            this.data = data;
+            this.parent = parent;
         }
     }
 

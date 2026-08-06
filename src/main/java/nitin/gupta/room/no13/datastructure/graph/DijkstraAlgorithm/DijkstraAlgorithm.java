@@ -5,6 +5,30 @@ import java.util.*;
 
 class Graph<T extends Comparable<T>> {
 
+    private final Map<T, Vertex<T>> vertices = new HashMap<>();
+
+    public Vertex<T> addVertex(T data) {
+        return vertices.computeIfAbsent(data, Vertex::new);
+    }
+
+    public void addEdge(T from, T to, double weight, boolean directed) {
+        Vertex<T> v1 = addVertex(from);
+        Vertex<T> v2 = addVertex(to);
+
+        v1.addEdge(v2, weight);
+        if (!directed && v1 != v2) {
+            v2.addEdge(v1, weight);
+        }
+    }
+
+    public Vertex<T> getVertex(T data) {
+        return vertices.get(data);
+    }
+
+    public Set<T> getAllVertexData() {
+        return vertices.keySet();
+    }
+
     static class Edge<T extends Comparable<T>> {
         Vertex<T> target;
         double weight;
@@ -44,30 +68,6 @@ class Graph<T extends Comparable<T>> {
             return Objects.hash(data);
         }
     }
-
-    private final Map<T, Vertex<T>> vertices = new HashMap<>();
-
-    public Vertex<T> addVertex(T data) {
-        return vertices.computeIfAbsent(data, Vertex::new);
-    }
-
-    public void addEdge(T from, T to, double weight, boolean directed) {
-        Vertex<T> v1 = addVertex(from);
-        Vertex<T> v2 = addVertex(to);
-
-        v1.addEdge(v2, weight);
-        if (!directed && v1 != v2) {
-            v2.addEdge(v1, weight);
-        }
-    }
-
-    public Vertex<T> getVertex(T data) {
-        return vertices.get(data);
-    }
-
-    public Set<T> getAllVertexData() {
-        return vertices.keySet();
-    }
 }
 
 public class DijkstraAlgorithm<T extends Comparable<T>> {
@@ -78,28 +78,19 @@ public class DijkstraAlgorithm<T extends Comparable<T>> {
         this.graph = graph;
     }
 
-    // Result holder: shortest distances + predecessor map (for path reconstruction)
-    public static class Result<T> {
-        public final Map<T, Double> distances;
-        public final Map<T, T> previous;
+    public static void main(String[] args) {
+        Graph<String> graph = new Graph<>();
+        graph.addEdge("A", "B", 4, false);
+        graph.addEdge("A", "C", 1, false);
+        graph.addEdge("C", "B", 2, false);
+        graph.addEdge("B", "D", 5, false);
+        graph.addEdge("C", "D", 8, false);
 
-        Result(Map<T, Double> distances, Map<T, T> previous) {
-            this.distances = distances;
-            this.previous = previous;
-        }
+        DijkstraAlgorithm<String> dijkstra = new DijkstraAlgorithm<>(graph);
+        Result<String> result = dijkstra.run("A");
 
-        public List<T> pathTo(T target) {
-            if (!distances.containsKey(target) || distances.get(target) == Double.POSITIVE_INFINITY) {
-                return Collections.emptyList();
-            }
-            LinkedList<T> path = new LinkedList<>();
-            T current = target;
-            while (current != null) {
-                path.addFirst(current);
-                current = previous.get(current);
-            }
-            return path;
-        }
+        System.out.println("Distances from A: " + result.distances);
+        System.out.println("Path A -> D: " + result.pathTo("D"));
     }
 
     public Result<T> run(T startData) {
@@ -143,18 +134,27 @@ public class DijkstraAlgorithm<T extends Comparable<T>> {
         return new Result<>(distances, previous);
     }
 
-    public static void main(String[] args) {
-        Graph<String> graph = new Graph<>();
-        graph.addEdge("A", "B", 4, false);
-        graph.addEdge("A", "C", 1, false);
-        graph.addEdge("C", "B", 2, false);
-        graph.addEdge("B", "D", 5, false);
-        graph.addEdge("C", "D", 8, false);
+    // Result holder: shortest distances + predecessor map (for path reconstruction)
+    public static class Result<T> {
+        public final Map<T, Double> distances;
+        public final Map<T, T> previous;
 
-        DijkstraAlgorithm<String> dijkstra = new DijkstraAlgorithm<>(graph);
-        Result<String> result = dijkstra.run("A");
+        Result(Map<T, Double> distances, Map<T, T> previous) {
+            this.distances = distances;
+            this.previous = previous;
+        }
 
-        System.out.println("Distances from A: " + result.distances);
-        System.out.println("Path A -> D: " + result.pathTo("D"));
+        public List<T> pathTo(T target) {
+            if (!distances.containsKey(target) || distances.get(target) == Double.POSITIVE_INFINITY) {
+                return Collections.emptyList();
+            }
+            LinkedList<T> path = new LinkedList<>();
+            T current = target;
+            while (current != null) {
+                path.addFirst(current);
+                current = previous.get(current);
+            }
+            return path;
+        }
     }
 }

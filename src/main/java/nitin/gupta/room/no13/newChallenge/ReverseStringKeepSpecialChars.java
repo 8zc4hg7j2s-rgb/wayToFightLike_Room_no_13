@@ -43,6 +43,7 @@ public class ReverseStringKeepSpecialChars {
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
+
     public static void main(String[] args) {
         String input1 = "1a-b#C-dE&f-g3h@%Ij";
         String input2 = "Test1ng-Leet=code-Q!";

@@ -1,18 +1,20 @@
 md_content = """# SOLID Design Principles in Java
 
-The **SOLID** principles are five design guidelines for writing clean, maintainable, understandable, and scalable object-oriented software. Introduced by Robert C. Martin (Uncle Bob), these principles help developers reduce tight coupling, avoid code smell, and design robust architectures.
+The **SOLID** principles are five design guidelines for writing clean, maintainable, understandable, and scalable
+object-oriented software. Introduced by Robert C. Martin (Uncle Bob), these principles help developers reduce tight
+coupling, avoid code smell, and design robust architectures.
 
 ---
 
 ## Overview
 
-| Letter | Principle | Core Idea |
-| :---: | :--- | :--- |
-| **S** | **Single Responsibility Principle (SRP)** | A class should have one, and only one, reason to change. |
-| **O** | **Open/Closed Principle (OCP)** | Software entities should be open for extension, but closed for modification. |
-| **L** | **Liskov Substitution Principle (LSP)** | Subtypes must be substitutable for their base types without altering correctness. |
-| **I** | **Interface Segregation Principle (ISP)** | Clients should not be forced to depend on interfaces they do not use. |
-| **D** | **Dependency Inversion Principle (DIP)** | High-level modules should depend on abstractions, not concrete implementations. |
+| Letter | Principle                                 | Core Idea                                                                         |
+|:------:|:------------------------------------------|:----------------------------------------------------------------------------------|
+| **S**  | **Single Responsibility Principle (SRP)** | A class should have one, and only one, reason to change.                          |
+| **O**  | **Open/Closed Principle (OCP)**           | Software entities should be open for extension, but closed for modification.      |
+| **L**  | **Liskov Substitution Principle (LSP)**   | Subtypes must be substitutable for their base types without altering correctness. |
+| **I**  | **Interface Segregation Principle (ISP)** | Clients should not be forced to depend on interfaces they do not use.             |
+| **D**  | **Dependency Inversion Principle (DIP)**  | High-level modules should depend on abstractions, not concrete implementations.   |
 
 ---
 
@@ -22,7 +24,8 @@ The **SOLID** principles are five design guidelines for writing clean, maintaina
 
 ### ❌ Violation Example
 
-In this example, the `Invoice` class handles invoice calculation, printing, and database persistence. If the saving logic or printing format changes, this class must be modified.
+In this example, the `Invoice` class handles invoice calculation, printing, and database persistence. If the saving
+logic or printing format changes, this class must be modified.
 
 ```java
 // BAD: Invoice class handles multiple responsibilities
@@ -49,8 +52,8 @@ public class Invoice {
 
 ### ✅ Good Example
 
-Separate the responsibilities into distinct classes: `Invoice` for
-business calculation, `InvoicePrinter` for rendering output, and
+Separate the responsibilities into distinct classes: `Invoice` for business calculation, `InvoicePrinter` for rendering
+output, and
 `InvoiceRepository` for persistence.
 
 ``` java
@@ -90,9 +93,8 @@ public class InvoiceRepository {
 
 ### ❌ Violation Example
 
-Adding a new payment method (e.g., PayPal) requires modifying the
-existing `PaymentProcessor` class, increasing the risk of introducing
-bugs.
+Adding a new payment method (e.g., PayPal) requires modifying the existing `PaymentProcessor` class, increasing the risk
+of introducing bugs.
 
 ``` java
 // BAD: Class must be modified whenever a new payment mode is added
@@ -110,8 +112,8 @@ public class PaymentProcessor {
 
 ### ✅ Good Example
 
-Define a `PaymentMethod` interface. Adding new payment methods requires
-creating new implementation classes without touching existing code.
+Define a `PaymentMethod` interface. Adding new payment methods requires creating new implementation classes without
+touching existing code.
 
 ``` java
 // GOOD: Open for extension via abstraction, closed for modification
@@ -183,8 +185,7 @@ public class Square extends Rectangle {
 
 ### ✅ Good Example
 
-Segregate `Square` and `Rectangle` into independent classes implementing
-a common `Shape` interface.
+Segregate `Square` and `Rectangle` into independent classes implementing a common `Shape` interface.
 
 ``` java
 // GOOD: Derived classes adhere to the contract without side effects
@@ -232,8 +233,7 @@ public class Square implements Shape {
 
 ### ❌ Violation Example
 
-`RobotWorker` is forced to implement `eat()`, which it doesn't need,
-throwing an `UnsupportedOperationException`.
+`RobotWorker` is forced to implement `eat()`, which it doesn't need, throwing an `UnsupportedOperationException`.
 
 ``` java
 // BAD: Fat interface forcing unnecessary methods
@@ -328,8 +328,8 @@ public class Car {
 
 ### ✅ Good Example
 
-`Car` depends on an `Engine` interface. Specific engine implementations
-(Petrol, Electric) are injected into `Car` via constructor injection.
+`Car` depends on an `Engine` interface. Specific engine implementations (Petrol, Electric) are injected into `Car` via
+constructor injection.
 
 ``` java
 // GOOD: High-level and low-level modules depend on abstraction
@@ -370,21 +370,15 @@ public class Car {
 
 ## Summary & Key Takeaways
 
-1.  **SRP**: Keeps classes focused, lightweight, and easy to test.
-2.  **OCP**: Promotes extensibility using polymorphism without risking
-    breaking existing code.
-3.  **LSP**: Ensures subtype behavior stays compatible with interface
-    expectations.
-4.  **ISP**: Prevents bloated interfaces and dummy/throwing method
-    implementations.
-5.  **DIP**: Reduces coupling by relying on abstractions, enabling
-    flexibility and easier unit testing (mocking). """
+1. **SRP**: Keeps classes focused, lightweight, and easy to test.
+2. **OCP**: Promotes extensibility using polymorphism without risking breaking existing code.
+3. **LSP**: Ensures subtype behavior stays compatible with interface expectations.
+4. **ISP**: Prevents bloated interfaces and dummy/throwing method implementations.
+5. **DIP**: Reduces coupling by relying on abstractions, enabling flexibility and easier unit testing (mocking). """
 
-file_path = "SOLID_Design_Principles_Java.md" with open(file_path, "w",
-encoding="utf-8") as f: f.write(md_content)
+file_path = "SOLID_Design_Principles_Java.md" with open (file_path, "w", encoding="utf-8") as f: f.write (md_content)
 
-print(f"File created successfully: {file_path}")
-
+print (f"File created successfully: {file_path}")
 
     ```text?code_stdout&code_event_index=1
     File created successfully: SOLID_Design_Principles_Java.md
@@ -393,18 +387,16 @@ Your Markdown file is ready
 
 ### Summary of Included Topics in `SOLID_Design_Principles_Java.md`:
 
-1.  **Single Responsibility Principle (SRP):** Explanation + Bad
-    vs. Good Java examples separating data/logic from persistence and
-    rendering.
-2.  **Open/Closed Principle (OCP):** Explanation + Bad vs. Good Java
-    examples demonstrating interface extension vs. conditional logic.
-3.  **Liskov Substitution Principle (LSP):** Explanation + The classic
-    `Rectangle`/`Square` hierarchy bug vs. a clean interface-driven
-    `Shape` model.
-4.  **Interface Segregation Principle (ISP):** Explanation + Breaking
-    monolithic interfaces into modular (`Workable`, `Eatable`)
-    interfaces.
-5.  **Dependency Inversion Principle (DIP):** Explanation + Decoupling
-    `Car` from concrete engines using constructor dependency injection.
-6.  **Summary Table & Best Practices:** Key takeaways for applying SOLID
-    principles in clean architecture.
+1. **Single Responsibility Principle (SRP):** Explanation + Bad vs. Good Java examples separating data/logic from
+   persistence and rendering.
+2. **Open/Closed Principle (OCP):** Explanation + Bad vs. Good Java examples demonstrating interface extension
+   vs. conditional logic.
+3. **Liskov Substitution Principle (LSP):** Explanation + The classic
+   `Rectangle`/`Square` hierarchy bug vs. a clean interface-driven
+   `Shape` model.
+4. **Interface Segregation Principle (ISP):** Explanation + Breaking monolithic interfaces into modular (`Workable`,
+   `Eatable`)
+   interfaces.
+5. **Dependency Inversion Principle (DIP):** Explanation + Decoupling
+   `Car` from concrete engines using constructor dependency injection.
+6. **Summary Table & Best Practices:** Key takeaways for applying SOLID principles in clean architecture.

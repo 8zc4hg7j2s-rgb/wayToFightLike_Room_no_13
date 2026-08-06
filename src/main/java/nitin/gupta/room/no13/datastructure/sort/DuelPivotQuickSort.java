@@ -13,13 +13,14 @@ public class DuelPivotQuickSort {
         }
         dualPivotQuicksort(arr, 0, arr.length - 1);
     }
+
     public static void dualPivotQuicksort(int[] arr, int low, int high) {
         if (low >= high) {
             return;
         }
         // 1. Ensure left pivot is smaller than or equal to right pivot
         if (arr[low] > arr[high]) {
-            swap(arr , low, high);
+            swap(arr, low, high);
         }
         int pivot1 = arr[low];
         int pivot2 = arr[high];

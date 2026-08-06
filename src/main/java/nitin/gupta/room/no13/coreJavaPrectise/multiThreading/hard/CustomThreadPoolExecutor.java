@@ -13,9 +13,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class CustomThreadPoolExecutor extends ThreadPoolExecutor {
 
-    private volatile boolean isPaused;
     private final ReentrantLock pauseLock = new ReentrantLock();
     private final Condition unpaused = pauseLock.newCondition();
+    private volatile boolean isPaused;
 
     public CustomThreadPoolExecutor(int corePoolSize,
                                     int maximumPoolSize,

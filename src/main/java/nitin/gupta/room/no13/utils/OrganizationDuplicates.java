@@ -11,6 +11,6 @@ public record OrganizationDuplicates(
         String description,
         String founded,
         String industry,
-        String  numberOfEmployees,
+        String numberOfEmployees,
         LocalDateTime UpdatedAt) {
 }

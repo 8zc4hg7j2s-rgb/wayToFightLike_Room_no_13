@@ -18,24 +18,6 @@ public class TimeSpread {
         stopCounter = new AtomicInteger(threads);
     }
 
-    public void start() {
-        if (!started.get()) {
-            if (started.compareAndSet(false, true)) {
-                startTime = System.currentTimeMillis();
-            }
-        }
-    }
-
-    public void stop() {
-        if (stopCounter.getAndDecrement() == 1) {
-            stopTime = System.currentTimeMillis();
-        }
-    }
-
-    public long timeConsumed() {
-        return stopTime - startTime;
-    }
-
     public static long time(Executor executor, int concurrency, final Runnable action) throws InterruptedException {
         final CountDownLatch ready = new CountDownLatch(concurrency);
         final CountDownLatch start = new CountDownLatch(1);
@@ -85,5 +67,23 @@ public class TimeSpread {
             thread.join();
         }
         System.out.println("time spread = " + timeSpread.timeConsumed());
+    }
+
+    public void start() {
+        if (!started.get()) {
+            if (started.compareAndSet(false, true)) {
+                startTime = System.currentTimeMillis();
+            }
+        }
+    }
+
+    public void stop() {
+        if (stopCounter.getAndDecrement() == 1) {
+            stopTime = System.currentTimeMillis();
+        }
+    }
+
+    public long timeConsumed() {
+        return stopTime - startTime;
     }
 }

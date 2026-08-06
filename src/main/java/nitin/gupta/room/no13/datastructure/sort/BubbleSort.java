@@ -8,7 +8,14 @@ public class BubbleSort {
         int[] data = {24, 8, -42, 75, -24, 2, 16, 60, 31, 10};
         BubbleSort bubbleSort = new BubbleSort();
         bubbleSort.bubbleSort(data);
-        System.out.println("Sorted array"+ Arrays.toString(data));;
+        System.out.println("Sorted array" + Arrays.toString(data));
+        ;
+    }
+
+    private static void swap(int[] arr, int start, int end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
     }
 
     private void bubbleSort(int[] data) {
@@ -19,11 +26,5 @@ public class BubbleSort {
                 }
             }
         }
-    }
-
-    private static void swap(int[] arr, int start, int end) {
-        int temp = arr[start];
-        arr[start] = arr[end];
-        arr[end] = temp;
     }
 }

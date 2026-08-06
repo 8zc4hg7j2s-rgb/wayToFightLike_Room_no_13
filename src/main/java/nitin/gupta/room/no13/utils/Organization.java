@@ -7,7 +7,7 @@ public record Organization(
         String Website,
         String country,
         String description,
-        String  founded,
+        String founded,
         String industry,
-        String  numberOfEmployees) {
+        String numberOfEmployees) {
 }

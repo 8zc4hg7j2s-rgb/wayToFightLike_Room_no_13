@@ -15,7 +15,7 @@ public class WordCountInFile {
         LinkedHashMap<String, Long> map = Files.lines(file)
                 .flatMap(String::lines)
                 .map(e -> e.split("[ .;::()]"))
-                 .flatMap(Arrays::stream)
+                .flatMap(Arrays::stream)
                 .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()));
         map.entrySet().stream().forEach(System.out::println);
     }
@@ -41,6 +41,7 @@ public class WordCountInFile {
         }
         return result;
     }
+
     public static int[] merge1(int[] foo, int[] bar) {
         int[] result = new int[foo.length + bar.length];
         System.arraycopy(foo, 0, result, 0, foo.length);

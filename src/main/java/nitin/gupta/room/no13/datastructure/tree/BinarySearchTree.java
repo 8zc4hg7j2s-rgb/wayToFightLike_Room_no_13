@@ -8,23 +8,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @NoArgsConstructor
-public class BinarySearchTree <T extends Comparable<T>> {
+public class BinarySearchTree<T extends Comparable<T>> {
+    int leftcount = 0;
     private Tree<T> root;
 
-    @ToString
-    @EqualsAndHashCode
-    static class Tree<T extends Comparable<T>> {
-        T data;
-        Tree<T> left, right,parent;
-        Tree(T data ,Tree<T> parent) {
-            this.data = data;
-            this.parent = parent;
-        }
-    }
     public void insert(T data) {
         if (root == null) {
-            root = new Tree<>(data ,null);
-        }else {
+            root = new Tree<>(data, null);
+        } else {
             insertRec(root, data);
         }
     }
@@ -79,6 +70,7 @@ public class BinarySearchTree <T extends Comparable<T>> {
 
         return current;
     }
+
     private T findMin(Tree<T> node) {
         T minVal = node.data;
         while (node.left != null) {
@@ -87,6 +79,7 @@ public class BinarySearchTree <T extends Comparable<T>> {
         }
         return minVal;
     }
+
     public T search(T data) {
         Tree<T> current = root;
         while (current != null) {
@@ -97,6 +90,7 @@ public class BinarySearchTree <T extends Comparable<T>> {
         }
         return null;
     }
+
     public T minimum() {
         Tree<T> current = root;
         while (current.left != null) {
@@ -104,16 +98,19 @@ public class BinarySearchTree <T extends Comparable<T>> {
         }
         return current.data;
     }
-    public  T maximum() {
+
+    public T maximum() {
         Tree<T> current = root;
         while (current.right != null) {
             current = current.right;
         }
         return current.data;
     }
-    public  int height() {
+
+    public int height() {
         return heightRec(root);
     }
+
     private int heightRec(Tree<T> node) {
         if (node == null) {
             return -1;
@@ -122,15 +119,18 @@ public class BinarySearchTree <T extends Comparable<T>> {
         int rightHeight = heightRec(node.right);
         return Math.max(leftHeight, rightHeight) + 1;
     }
-    public  int size() {
+
+    public int size() {
         return sizeRec(root);
     }
+
     private int sizeRec(Tree<T> node) {
         if (node == null) {
             return 0;
         }
         return sizeRec(node.left) + sizeRec(node.right) + 1;
     }
+
     //Left->root->right
     public void inOrderTraversal() {
         Tree<T> current = root;
@@ -141,6 +141,7 @@ public class BinarySearchTree <T extends Comparable<T>> {
         }
 
     }
+
     //Root ->Left $ -> Right
     public void preOrderTraversal() {
         Tree<T> current = root;
@@ -150,15 +151,17 @@ public class BinarySearchTree <T extends Comparable<T>> {
             if (current.right != null) current = current.right;
         }
     }
+
     //Left->Right->Root
-    public void postOrderTraversal(){
+    public void postOrderTraversal() {
         Tree<T> current = root;
         while (current != null) {
-                if (current.left != null) current = current.left;
-                if (current.right != null) current = current.right;
-                System.out.println(current.data);
-            }
+            if (current.left != null) current = current.left;
+            if (current.right != null) current = current.right;
+            System.out.println(current.data);
+        }
     }
+
     //Level-by-level top to bottom
     public void levelOrderTraversal() {
         if (root == null) return;
@@ -176,6 +179,7 @@ public class BinarySearchTree <T extends Comparable<T>> {
             }
         }
     }
+
     public void printLeafNode(Tree<T> left) {
         Tree<T> current = root;
         while (current != null) {
@@ -191,14 +195,25 @@ public class BinarySearchTree <T extends Comparable<T>> {
         }
     }
 
-    int leftcount=0;
-    public Tree<T> kthSmallesdsfsPr4stNode(Tree<T> node,int k){
-        if(node==null) return null;
-        Tree<T> left = kthSmallesdsfsPr4stNode(node.left ,k);
-        if(left!=null) left=left;
+    public Tree<T> kthSmallesdsfsPr4stNode(Tree<T> node, int k) {
+        if (node == null) return null;
+        Tree<T> left = kthSmallesdsfsPr4stNode(node.left, k);
+        if (left != null) left = left;
         leftcount++;
-        if(leftcount==k) return node;
-        return kthSmallesdsfsPr4stNode(node.right ,k);
+        if (leftcount == k) return node;
+        return kthSmallesdsfsPr4stNode(node.right, k);
+    }
+
+    @ToString
+    @EqualsAndHashCode
+    static class Tree<T extends Comparable<T>> {
+        T data;
+        Tree<T> left, right, parent;
+
+        Tree(T data, Tree<T> parent) {
+            this.data = data;
+            this.parent = parent;
+        }
     }
 
 

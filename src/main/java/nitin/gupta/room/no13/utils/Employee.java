@@ -6,4 +6,5 @@ public record Employee(
         String department,
         int salary_inr,
         String ity
-) {}
+) {
+}

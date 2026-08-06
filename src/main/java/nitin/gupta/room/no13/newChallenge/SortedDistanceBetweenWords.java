@@ -11,12 +11,12 @@ public class SortedDistanceBetweenWords {
 
     /**
      * Finds the shortest distance (in number of words between them) between two distinct words.
-     *
+     * <p>
      * Time Complexity:  O(N) - Single pass through the string array.
      * Space Complexity: O(1) - Uses constant extra space.
      */
     public static int sortedDistanceBetweenWords(String w1, String w2, String[] strArray) {
-        if (strArray == null || w1 == null || w2 == null ){
+        if (strArray == null || w1 == null || w2 == null) {
             return -1;
         }
 

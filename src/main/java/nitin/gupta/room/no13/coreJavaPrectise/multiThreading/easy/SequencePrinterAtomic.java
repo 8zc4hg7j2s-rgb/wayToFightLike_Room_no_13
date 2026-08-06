@@ -12,15 +12,6 @@ public class SequencePrinterAtomic {
         this.maxLimit = maxLimit;
     }
 
-    public void printSequence(int threadId) {
-        while (state.get() <= maxLimit) {
-            if (state.get() % totalThreads == threadId % totalThreads) {
-                System.out.println(Thread.currentThread().getName() + " " + state.get());
-                state.incrementAndGet();
-            }
-        }
-    }
-
     public static void main(String[] args) {
         int limit = 10;
         SequencePrinterAtomic printer = new SequencePrinterAtomic(3, limit);
@@ -32,5 +23,14 @@ public class SequencePrinterAtomic {
         t1.start();
         t2.start();
         t3.start();
+    }
+
+    public void printSequence(int threadId) {
+        while (state.get() <= maxLimit) {
+            if (state.get() % totalThreads == threadId % totalThreads) {
+                System.out.println(Thread.currentThread().getName() + " " + state.get());
+                state.incrementAndGet();
+            }
+        }
     }
 }

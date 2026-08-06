@@ -1,10 +1,10 @@
 package nitin.gupta.room.no13.coreJavaPrectise.multiThreading.easy;
 
 class PrintSequenceRunnable implements Runnable {
+    private static int number = 1;
     private final int remainder;
     private final int printLimit;
     private final Object lock;
-    private static int number = 1;
 
     public PrintSequenceRunnable(int remainder, int printLimit, Object lock) {
         this.remainder = remainder;

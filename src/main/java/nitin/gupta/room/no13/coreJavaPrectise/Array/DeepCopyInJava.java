@@ -1,6 +1,6 @@
 package nitin.gupta.room.no13.coreJavaPrectise.Array;
 
-class Department implements Cloneable{
+class Department implements Cloneable {
     String empId;
 
     String grade;
@@ -14,6 +14,7 @@ class Department implements Cloneable{
 
         this.designation = designation;
     }
+
     //Default version of clone() method.
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -65,7 +66,7 @@ public class DeepCopyInJava {
         // Printing the designation of 'emp1'
 
         System.out.println(emp1.dept.designation); // Output : AVP
-        emp1.dept.designation="sdsds";
+        emp1.dept.designation = "sdsds";
 
         // Changing the designation of 'emp2'
 

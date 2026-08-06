@@ -3,25 +3,9 @@ package nitin.gupta.room.no13.datastructure.map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.Map;
-
 public class PMMPinCustomMap<K extends Comparable<K>, V> {
     private final int capacity;
-    private  Entry[] table;
-
-    @ToString
-    @EqualsAndHashCode
-    static class Entry<K extends Comparable<K>, V> {
-        K key;
-        V value;
-        Entry<K, V> next;
-
-        public Entry(K key, V value, Entry<K, V> next) {
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
-    }
+    private Entry[] table;
 
     public PMMPinCustomMap(int capacity) {
         this.capacity = capacity;
@@ -50,7 +34,7 @@ public class PMMPinCustomMap<K extends Comparable<K>, V> {
     }
 
     public int getHashCodeValue(K key) {
-        return key.hashCode()%capacity;
+        return key.hashCode() % capacity;
     }
 
     public V get(K key) {
@@ -63,30 +47,47 @@ public class PMMPinCustomMap<K extends Comparable<K>, V> {
         }
         return null;
     }
+
     public void remove(K key) {
         int index = getHashCodeValue(key);
         Entry<K, V> entry = table[index];
         if (entry != null) {
-            while(entry != null) {
-                if(entry.key.equals(key)) {
+            while (entry != null) {
+                if (entry.key.equals(key)) {
                     entry.next = entry.next.next;
                 }
                 entry = entry.next;
             }
         }
     }
+
     public void clear() {
         this.table = null;
     }
+
     public void printAll() {
-       Entry[] bucket =table;
-         for (int i = 0; i < bucket.length; i++) {
-                Entry entry = bucket[i];
-                while (entry != null) {
-                 System.out.println(entry.key + " : " + entry.value);
-                 entry = entry.next;
-                }
-          }
+        Entry[] bucket = table;
+        for (int i = 0; i < bucket.length; i++) {
+            Entry entry = bucket[i];
+            while (entry != null) {
+                System.out.println(entry.key + " : " + entry.value);
+                entry = entry.next;
+            }
+        }
+    }
+
+    @ToString
+    @EqualsAndHashCode
+    static class Entry<K extends Comparable<K>, V> {
+        K key;
+        V value;
+        Entry<K, V> next;
+
+        public Entry(K key, V value, Entry<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
     }
 }
 

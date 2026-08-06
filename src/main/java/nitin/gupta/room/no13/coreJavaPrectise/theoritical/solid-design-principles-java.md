@@ -1,6 +1,8 @@
 # SOLID Design Principles (with Java Examples)
 
-SOLID is an acronym for five object-oriented design principles that help developers write maintainable, extensible, and testable code. Introduced by Robert C. Martin ("Uncle Bob"), these principles are widely used as a foundation for good software architecture.
+SOLID is an acronym for five object-oriented design principles that help developers write maintainable, extensible, and
+testable code. Introduced by Robert C. Martin ("Uncle Bob"), these principles are widely used as a foundation for good
+software architecture.
 
 ---
 
@@ -8,7 +10,8 @@ SOLID is an acronym for five object-oriented design principles that help develop
 
 **A class should have only one reason to change.**
 
-Each class should be responsible for a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class.
+Each class should be responsible for a single part of the functionality provided by the software, and that
+responsibility should be entirely encapsulated by the class.
 
 ### ❌ Violation
 
@@ -44,7 +47,9 @@ class Invoice {
         return amount * 1.18;
     }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 }
 
 class InvoiceRepository {
@@ -61,7 +66,8 @@ class InvoicePrinter {
 }
 ```
 
-Now each class has exactly one reason to change: `Invoice` changes if billing logic changes, `InvoiceRepository` changes if storage changes, and `InvoicePrinter` changes if the output format changes.
+Now each class has exactly one reason to change: `Invoice` changes if billing logic changes, `InvoiceRepository` changes
+if storage changes, and `InvoicePrinter` changes if the output format changes.
 
 ---
 
@@ -165,7 +171,8 @@ class Ostrich implements Bird {
 }
 ```
 
-Now `Ostrich` only implements behavior it can actually support, and any `FlyingBird` reference is guaranteed to fly correctly.
+Now `Ostrich` only implements behavior it can actually support, and any `FlyingBird` reference is guaranteed to fly
+correctly.
 
 ---
 
@@ -283,19 +290,20 @@ UserService service = new UserService(new MongoDatabase());
 service.saveUser("Alice");
 ```
 
-`UserService` now depends only on the `Database` interface. Swapping databases requires no changes to `UserService` itself.
+`UserService` now depends only on the `Database` interface. Swapping databases requires no changes to `UserService`
+itself.
 
 ---
 
 ## Summary Table
 
-| Principle | Core Idea | Key Benefit |
-|---|---|---|
-| **S**ingle Responsibility | One class, one reason to change | Easier maintenance |
-| **O**pen/Closed | Open for extension, closed for modification | Safer feature additions |
-| **L**iskov Substitution | Subtypes must be substitutable for base types | Reliable polymorphism |
-| **I**nterface Segregation | Many small interfaces over one large one | No unused dependencies |
-| **D**ependency Inversion | Depend on abstractions, not concretions | Loose coupling, testability |
+| Principle                 | Core Idea                                     | Key Benefit                 |
+|---------------------------|-----------------------------------------------|-----------------------------|
+| **S**ingle Responsibility | One class, one reason to change               | Easier maintenance          |
+| **O**pen/Closed           | Open for extension, closed for modification   | Safer feature additions     |
+| **L**iskov Substitution   | Subtypes must be substitutable for base types | Reliable polymorphism       |
+| **I**nterface Segregation | Many small interfaces over one large one      | No unused dependencies      |
+| **D**ependency Inversion  | Depend on abstractions, not concretions       | Loose coupling, testability |
 
 ---
 
@@ -306,4 +314,5 @@ service.saveUser("Alice");
 - **Scalability** — New features can be added (OCP) without destabilizing existing functionality.
 - **Readability** — Small, focused classes and interfaces (SRP, ISP) are easier to understand.
 
-SOLID principles work best together — they are complementary, not isolated rules. For example, applying OCP often naturally requires DIP (coding to interfaces) to allow extension without modification.
+SOLID principles work best together — they are complementary, not isolated rules. For example, applying OCP often
+naturally requires DIP (coding to interfaces) to allow extension without modification.

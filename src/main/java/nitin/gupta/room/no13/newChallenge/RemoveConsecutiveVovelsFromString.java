@@ -20,6 +20,7 @@ public class RemoveConsecutiveVovelsFromString {
         System.out.println("Original: " + s);
         System.out.println("Result:   " + result.toString());
     }
+
     private static boolean isVowel(char ch) {
         char lower = Character.toLowerCase(ch);
         return lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u';

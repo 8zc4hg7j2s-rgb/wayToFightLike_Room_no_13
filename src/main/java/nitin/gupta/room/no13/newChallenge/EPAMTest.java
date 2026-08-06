@@ -6,14 +6,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- *  * find out elements ,who have length is less than 5 characters
- *  * and print in upper case insertion order must be preserved  .
- *  * redundant element must not print.
- *  */
+ * * find out elements ,who have length is less than 5 characters
+ * * and print in upper case insertion order must be preserved  .
+ * * redundant element must not print.
+ *
+ */
 
 public class EPAMTest {
     static void main() {
-        String str ="New York City NYC, often simply called New York is" +
+        String str = "New York City NYC, often simply called New York is" +
                 " the most populous city in the United States";
         Arrays.stream(str.split(" "))
                 .collect(Collectors.groupingBy(Function.identity()

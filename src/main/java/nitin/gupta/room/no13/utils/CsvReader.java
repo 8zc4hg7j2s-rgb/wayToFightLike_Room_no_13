@@ -171,7 +171,7 @@ public class CsvReader {
                         cleanField(values[6].trim()),
                         cleanField(values[7].trim()),
                         cleanField(values[8].trim()),
-                        LocalDateTime.parse(values[9].trim() ,formatter));
+                        LocalDateTime.parse(values[9].trim(), formatter));
                 organizationDuplicates.add(organization);
             }
         } catch (IOException e) {

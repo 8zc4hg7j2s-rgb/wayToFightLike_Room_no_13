@@ -7,7 +7,7 @@ public class MakeIntegerReverseDirection {
         String reverse = String.valueOf(k).chars()
                 .mapToObj(c -> (char) c)
                 .map(String::valueOf)
-                .reduce((a, b) ->  b + a)
+                .reduce((a, b) -> b + a)
                 .get();
         System.out.println(reverse);
     }

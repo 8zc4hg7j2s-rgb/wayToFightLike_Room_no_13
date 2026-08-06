@@ -11,9 +11,9 @@ public class PartitionByExample {
                 s = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Map<Boolean, List<Integer>>
                 map = s.collect(
-                Collectors.partitioningBy(num -> num %3==0));
+                Collectors.partitioningBy(num -> num % 3 == 0));
         for (Map.Entry<Boolean, List<Integer>> entry : map.entrySet()) {
-            System.out.println("Partition By Example :  "+ entry.getKey() + " : " + entry.getValue());
+            System.out.println("Partition By Example :  " + entry.getKey() + " : " + entry.getValue());
         }
 
     }

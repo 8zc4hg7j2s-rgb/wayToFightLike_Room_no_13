@@ -13,11 +13,11 @@ Reads never lock — they just read whatever array reference is currently set.
 
 ## Key Characteristics
 
-| Aspect | Behavior |
-|---|---|
-| Thread safety | Fully thread-safe for concurrent reads/writes |
-| Read performance | Fast, no locking, no blocking |
-| Write performance | Slow — O(n) copy on every mutation |
-| Iterator | Snapshot-based, never throws `ConcurrentModificationException` |
+| Aspect            | Behavior                                                                    |
+|-------------------|-----------------------------------------------------------------------------|
+| Thread safety     | Fully thread-safe for concurrent reads/writes                               |
+| Read performance  | Fast, no locking, no blocking                                               |
+| Write performance | Slow — O(n) copy on every mutation                                          |
+| Iterator          | Snapshot-based, never throws `ConcurrentModificationException`              |
 | Iterator mutation | `iterator.remove()`, `add()`, `set()` throw `UnsupportedOperationException` |
-| Memory | Higher — each write allocates a new array |
+| Memory            | Higher — each write allocates a new array                                   |

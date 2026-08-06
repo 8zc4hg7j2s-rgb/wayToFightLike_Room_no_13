@@ -1,8 +1,5 @@
 package nitin.gupta.room.no13.datastructure.list;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import java.util.Objects;
 
 public class DoublyLinkedList<T extends Comparable<T>> {
@@ -139,16 +136,18 @@ public class DoublyLinkedList<T extends Comparable<T>> {
     public void deleteAtHead() {
         if (head == null) return;
         head = head.next;
-        if (head != null) head.prev=null;
-        else tail=null;
+        if (head != null) head.prev = null;
+        else tail = null;
     }
-//– remove last node
+
+    //– remove last node
     public void deleteAtTail() {
         if (tail == null) return;
         tail = tail.prev;
-        if (tail != null) tail.next=null;
-        else head=null;
+        if (tail != null) tail.next = null;
+        else head = null;
     }
+
     //– remove node at a specific index
     public void deleteAtPosition(int index) {
         if (index < 0) {
@@ -181,8 +180,9 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             tail = prevNode; // deleting tail
         }
     }
-//9. deleteByValue(value) – remove first node matching a value
-public void deleteNode(Node<T> node) {
+
+    //9. deleteByValue(value) – remove first node matching a value
+    public void deleteNode(Node<T> node) {
         if (node == null) {
             throw new IllegalArgumentException("node cannot be null");
         }
@@ -206,7 +206,8 @@ public void deleteNode(Node<T> node) {
         node.next = null;
         node.prev = null;
     }
-//
+
+    //
 //            Traversal
 //11. traverseForward() – print/iterate from head to tail
 //12. traverseBackward() – print/iterate from tail to head
@@ -219,20 +220,21 @@ public void deleteNode(Node<T> node) {
 //            Utility
 //16. isEmpty() – check if list has zero nodes
 //17. size() / length() – count of nodes
-public void reverse() {
-    Node<T> prev = null;
-    Node<T> current = head;
-    tail = head; // old head becomes new tail
+    public void reverse() {
+        Node<T> prev = null;
+        Node<T> current = head;
+        tail = head; // old head becomes new tail
 
-    while (current != null) {
-        Node<T> nextNode = current.next;
-        current.next = prev;
-        prev = current;
-        current = nextNode;
+        while (current != null) {
+            Node<T> nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+        head = prev; // old tail (last non-null prev) becomes new head
     }
 
-    head = prev; // old tail (last non-null prev) becomes new head
-}
     public int size() {
         int count = 0;
         Node<T> current = head;
@@ -243,20 +245,21 @@ public void reverse() {
         return count;
     }
 
-//19. clear() – remove all nodes
-@SuppressWarnings("unchecked")
-public T[] toArray() {
-    Object[] result = new Object[size()];
-    Node<T> current = head;
-    int i = 0;
+    //19. clear() – remove all nodes
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        Object[] result = new Object[size()];
+        Node<T> current = head;
+        int i = 0;
 
-    while (current != null) {
-        result[i++] = current.data;
-        current = current.next;
+        while (current != null) {
+            result[i++] = current.data;
+            current = current.next;
+        }
+        return (T[]) result;
     }
-    return (T[]) result;
-}
-//
+
+    //
 //    Bonus (often included too)
 //
 //    getHead() / getTail() – return head/tail node

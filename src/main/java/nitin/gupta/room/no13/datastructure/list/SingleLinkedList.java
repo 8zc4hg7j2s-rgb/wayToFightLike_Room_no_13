@@ -12,6 +12,56 @@ import java.util.Objects;
 public class SingleLinkedList<T extends Comparable<T>> {
     private Node<T> head, tail;
 
+    public static Node mergeSort(Node head) {
+        // Base case: if list is empty or has only one node, it is already sorted
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // 1. Split the list into two halves
+        Node middle = getMiddle(head);
+        Node nextToMiddle = middle.next;
+        middle.next = null; // Break the link to separate into two sublists
+
+        // 2. Recursively sort both halves
+        Node left = mergeSort(head);
+        Node right = mergeSort(nextToMiddle);
+
+        // 3. Merge the sorted halves
+        return sortedMerge(left, right);
+    }
+
+    // Helper function to merge two sorted linked lists
+    private static Node sortedMerge(Node a, Node b) {
+        if (a == null) return b;
+        if (b == null) return a;
+
+        Node result;
+        if (a.value.compareTo(b.value) > 0) {
+            result = a;
+            result.next = sortedMerge(a.next, b);
+        } else {
+            result = b;
+            result.next = sortedMerge(a, b.next);
+        }
+        return result;
+    }
+
+    // Helper function to find the middle node using fast & slow pointers
+    private static Node getMiddle(Node head) {
+        if (head == null) return head;
+
+        Node slow = head;
+        Node fast = head;
+
+        // Move fast by two steps and slow by one step
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
     public void addAll(List<T> list) {
         // 1. Check if the input collection is null or empty
         if (list == null || list.isEmpty()) {
@@ -167,56 +217,6 @@ public class SingleLinkedList<T extends Comparable<T>> {
         } else throw new IndexOutOfBoundsException("exceed limit");
     }
 
-    public static Node mergeSort(Node head) {
-        // Base case: if list is empty or has only one node, it is already sorted
-        if (head == null || head.next == null) {
-            return head;
-        }
-
-        // 1. Split the list into two halves
-        Node middle = getMiddle(head);
-        Node nextToMiddle = middle.next;
-        middle.next = null; // Break the link to separate into two sublists
-
-        // 2. Recursively sort both halves
-        Node left = mergeSort(head);
-        Node right = mergeSort(nextToMiddle);
-
-        // 3. Merge the sorted halves
-        return sortedMerge(left, right);
-    }
-
-    // Helper function to merge two sorted linked lists
-    private static Node sortedMerge(Node a, Node b) {
-        if (a == null) return b;
-        if (b == null) return a;
-
-        Node result;
-        if (a.value.compareTo(b.value) > 0) {
-            result = a;
-            result.next = sortedMerge(a.next, b);
-        } else {
-            result = b;
-            result.next = sortedMerge(a, b.next);
-        }
-        return result;
-    }
-
-    // Helper function to find the middle node using fast & slow pointers
-    private static Node getMiddle(Node head) {
-        if (head == null) return head;
-
-        Node slow = head;
-        Node fast = head;
-
-        // Move fast by two steps and slow by one step
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-
     public boolean detectCycleInLinkedList_app2(Node<T> node) {
         if (head == null) {
             return false;
@@ -249,7 +249,6 @@ public class SingleLinkedList<T extends Comparable<T>> {
             this.next = next;
         }
     }
-
 
 
 }

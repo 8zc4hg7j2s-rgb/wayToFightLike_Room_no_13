@@ -8,6 +8,16 @@ public class PrintOddEvenSynchronized {
         this.limit = limit;
     }
 
+    public static void main(String[] args) {
+        PrintOddEvenSynchronized printer = new PrintOddEvenSynchronized(20);
+
+        Thread oddThread = new Thread(() -> printer.printNumber(false), "Odd");
+        Thread evenThread = new Thread(() -> printer.printNumber(true), "Even");
+
+        oddThread.start();
+        evenThread.start();
+    }
+
     public synchronized void printNumber(boolean isEven) {
         while (counter <= limit) {
             while ((counter % 2 == 0) != isEven) {
@@ -24,15 +34,5 @@ public class PrintOddEvenSynchronized {
                 notifyAll();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        PrintOddEvenSynchronized printer = new PrintOddEvenSynchronized(20);
-
-        Thread oddThread = new Thread(() -> printer.printNumber(false), "Odd");
-        Thread evenThread = new Thread(() -> printer.printNumber(true), "Even");
-
-        oddThread.start();
-        evenThread.start();
     }
 }

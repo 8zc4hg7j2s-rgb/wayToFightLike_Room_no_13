@@ -1,6 +1,6 @@
 package nitin.gupta.room.no13.coreJavaPrectise.Exception;
 
-public class CustomException extends RuntimeException{
+public class CustomException extends RuntimeException {
     public CustomException() {
     }
 

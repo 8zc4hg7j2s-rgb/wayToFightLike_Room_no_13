@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
  * we have 100 people list from index 1 to 100
  * make a group 1 to 10 ,10 to 20.... till 90 to 100
  */
-enum Range{
-    TEN, TWENTY, THIRTY , FORTY,FIFTY, SIXTY ,SEVENTY,EIGHTY ,NINETY ,HUNDRED;
+enum Range {
+    TEN, TWENTY, THIRTY, FORTY, FIFTY, SIXTY, SEVENTY, EIGHTY, NINETY, HUNDRED;
 }
+
 public class CreateGroupInRange {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
@@ -28,42 +29,42 @@ public class CreateGroupInRange {
 
     }
 
-    public static Range fromPowerLevel(int index){
-        Range result=Range.EIGHTY;
+    public static Range fromPowerLevel(int index) {
+        Range result = Range.EIGHTY;
         int a = index / 10;
-        switch (a){
+        switch (a) {
             case 0:
-                result=Range.TEN;
+                result = Range.TEN;
                 break;
             case 1:
-                result= Range.TEN;
+                result = Range.TEN;
                 break;
             case 2:
-                result= Range.TWENTY;
+                result = Range.TWENTY;
                 break;
             case 3:
-                result=  Range.THIRTY;
+                result = Range.THIRTY;
                 break;
             case 4:
-                result=  Range.FORTY;
+                result = Range.FORTY;
                 break;
             case 5:
-                result=  Range.FIFTY;
+                result = Range.FIFTY;
                 break;
             case 6:
-                result=  Range.SIXTY;
+                result = Range.SIXTY;
                 break;
             case 7:
-                result=  Range.SEVENTY;
+                result = Range.SEVENTY;
                 break;
             case 8:
-                result=  Range.EIGHTY;
+                result = Range.EIGHTY;
                 break;
             case 9:
-                result=  Range.NINETY;
+                result = Range.NINETY;
                 break;
             default:
-                result=  Range.HUNDRED;
+                result = Range.HUNDRED;
                 break;
         }
         return result;

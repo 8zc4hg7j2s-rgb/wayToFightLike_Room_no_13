@@ -2,7 +2,8 @@
 
 ## Overview
 
-`ConcurrentHashMap` is a thread-safe implementation of the `Map` interface designed for high concurrency and scalable performance. It allows multiple threads to read and update the map concurrently with minimal contention.
+`ConcurrentHashMap` is a thread-safe implementation of the `Map` interface designed for high concurrency and scalable
+performance. It allows multiple threads to read and update the map concurrently with minimal contention.
 
 ---
 
@@ -60,13 +61,14 @@ Provides atomic methods such as:
 ## Performance Characteristics
 
 | Operation | Average Complexity |
-|---|---|
-| `get` | O(1) |
-| `put` | O(1) |
-| `remove` | O(1) |
-| iteration | O(n) |
+|-----------|--------------------|
+| `get`     | O(1)               |
+| `put`     | O(1)               |
+| `remove`  | O(1)               |
+| iteration | O(n)               |
 
-Under heavy hash collisions, complexity may degrade, but tree bins help maintain near O(log n) performance for affected buckets.
+Under heavy hash collisions, complexity may degrade, but tree bins help maintain near O (log n) performance for affected
+buckets.
 
 ---
 
@@ -125,14 +127,14 @@ Safe to use while other threads modify the map.
 
 ## `ConcurrentHashMap` vs `HashMap`
 
-| Feature | `HashMap` | `ConcurrentHashMap` |
-|---|---|---|
-| Thread-safe | No | Yes |
-| Allows `null` key | Yes | No |
-| Allows `null` values | Yes | No |
-| Iterator behavior | Fail-fast | Weakly consistent |
-| Read concurrency | Unsafe | High |
-| Write concurrency | Unsafe | High |
+| Feature              | `HashMap` | `ConcurrentHashMap` |
+|----------------------|-----------|---------------------|
+| Thread-safe          | No        | Yes                 |
+| Allows `null` key    | Yes       | No                  |
+| Allows `null` values | Yes       | No                  |
+| Iterator behavior    | Fail-fast | Weakly consistent   |
+| Read concurrency     | Unsafe    | High                |
+| Write concurrency    | Unsafe    | High                |
 
 ---
 

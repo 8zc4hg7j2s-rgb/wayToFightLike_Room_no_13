@@ -23,28 +23,28 @@ import java.util.List;
  * Explanation: The subarray with zero-sum doesn't exist.
  */
 public class HackerRankPrectiseTest {
-     static void main() {
-         int[] array ={3, 4, -7, 3, 1, 3, 1, -4, -2, -2};
-         List<Integer> subset = new ArrayList<>();
-         List<List<Integer>> superset = new ArrayList<>();
-         combinationOfAllSuperset(array ,subset ,superset ,0);
-         boolean flag = false;
-        for(List<Integer> list : superset){
-            if(list.stream().mapToInt(Integer::intValue).sum()==0){
+    static void main() {
+        int[] array = {3, 4, -7, 3, 1, 3, 1, -4, -2, -2};
+        List<Integer> subset = new ArrayList<>();
+        List<List<Integer>> superset = new ArrayList<>();
+        combinationOfAllSuperset(array, subset, superset, 0);
+        boolean flag = false;
+        for (List<Integer> list : superset) {
+            if (list.stream().mapToInt(Integer::intValue).sum() == 0) {
                 flag = true;
             }
         }
-         System.out.println(flag);
-     }
+        System.out.println(flag);
+    }
 
     private static void combinationOfAllSuperset(int[] array, List<Integer> subset,
                                                  List<List<Integer>> superset, int i) {
-         superset.add(new ArrayList<>(subset));
-         for (int j = i; j < subset.size(); j++) {
-             subset.add(array[j]);
-             combinationOfAllSuperset(array, subset, superset, j++);
-             subset.remove(subset.size()-1);
-         }
+        superset.add(new ArrayList<>(subset));
+        for (int j = i; j < subset.size(); j++) {
+            subset.add(array[j]);
+            combinationOfAllSuperset(array, subset, superset, j++);
+            subset.remove(subset.size() - 1);
+        }
     }
 
 }

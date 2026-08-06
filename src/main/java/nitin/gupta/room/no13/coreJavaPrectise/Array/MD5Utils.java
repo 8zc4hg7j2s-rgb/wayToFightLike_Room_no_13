@@ -2,8 +2,10 @@ package nitin.gupta.room.no13.coreJavaPrectise.Array;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 public class MD5Utils {
-    private static int SHORT_URL_CHAR_SIZE=7;
+    private static int SHORT_URL_CHAR_SIZE = 7;
+
     public static String convert(String longURL) {
         try {
             // Create MD5 Hash
@@ -20,8 +22,9 @@ public class MD5Utils {
             throw new RuntimeException(e);
         }
     }
+
     public static String generateRandomShortUrl(String longURL) {
-        String hash=MD5Utils.convert(longURL);
+        String hash = MD5Utils.convert(longURL);
         return hash;
     }
 
@@ -30,7 +33,7 @@ public class MD5Utils {
         System.out.println(hash);
         int numberOfCharsInHash = hash.length();
         int counter = 0;
-        String sss="";
+        String sss = "";
         while (counter < numberOfCharsInHash - SHORT_URL_CHAR_SIZE) {
             sss = hash.substring(counter, counter + SHORT_URL_CHAR_SIZE);
             counter++;

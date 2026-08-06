@@ -25,6 +25,26 @@ public class CustomThreadPoolExecutorL2 {
         }
     }
 
+    // Driver / Demo Execution
+    public static void main(String[] args) throws InterruptedException {
+        CustomThreadPoolExecutorL2 pool = new CustomThreadPoolExecutorL2(3);
+
+        for (int i = 1; i <= 5; i++) {
+            final int taskId = i;
+            pool.execute(() -> {
+                System.out.println(Thread.currentThread().getName() + " processing task " + taskId);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException ignored) {
+                }
+            });
+        }
+
+        Thread.sleep(1000);
+        System.out.println("Initiating pool shutdown...");
+        pool.shutdown();
+    }
+
     /**
      * Submits a new task to the queue for execution.
      */
@@ -76,24 +96,5 @@ public class CustomThreadPoolExecutorL2 {
                 }
             }
         }
-    }
-
-    // Driver / Demo Execution
-    public static void main(String[] args) throws InterruptedException {
-        CustomThreadPoolExecutorL2 pool = new CustomThreadPoolExecutorL2(3);
-
-        for (int i = 1; i <= 5; i++) {
-            final int taskId = i;
-            pool.execute(() -> {
-                System.out.println(Thread.currentThread().getName() + " processing task " + taskId);
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException ignored) {}
-            });
-        }
-
-        Thread.sleep(1000);
-        System.out.println("Initiating pool shutdown...");
-        pool.shutdown();
     }
 }

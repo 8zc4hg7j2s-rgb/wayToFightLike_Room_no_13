@@ -2,14 +2,17 @@
 
 ## Overview
 
-Java 9 introduced several useful additions to the Stream API that make stream pipelines easier to express and avoid common boilerplate.
+Java 9 introduced several useful additions to the Stream API that make stream pipelines easier to express and avoid
+common boilerplate.
 
 ---
 
 ## 1. `takeWhile()`
 
 ### Description
-`takeWhile(Predicate)` returns elements from the beginning of the stream **until the predicate becomes false**. Once a false result is encountered, processing stops.
+
+`takeWhile(Predicate)` returns elements from the beginning of the stream **until the predicate becomes false**. Once a
+false result is encountered, processing stops.
 
 It works best on **ordered streams**.
 
@@ -42,6 +45,7 @@ for (int n : numbers) {
 ```
 
 ### Use Cases
+
 - Read data until a delimiter
 - Stop processing at the first invalid record
 - Prefix extraction
@@ -51,6 +55,7 @@ for (int n : numbers) {
 ## 2. `dropWhile()`
 
 ### Description
+
 `dropWhile(Predicate)` skips elements while the predicate is true, then returns the remaining elements.
 
 ### Example
@@ -70,6 +75,7 @@ List<Integer> result = numbers.stream()
 ```
 
 ### Use Cases
+
 - Skip headers
 - Ignore leading whitespace or comments
 - Resume processing after a marker
@@ -121,6 +127,7 @@ stream.forEach(System.out::println);
 ```
 
 ### Benefits
+
 - Avoids `limit()`
 - More readable
 - Natural termination condition
@@ -170,6 +177,7 @@ if (value != null) {
 ```
 
 ### Use Cases
+
 - Null-safe stream creation
 - Optional pipelines
 - Cleaner APIs
@@ -178,16 +186,17 @@ if (value != null) {
 
 # Comparison
 
-| Feature | Purpose | Stops Early | Java Version |
-|--------|---------|-------------|-------------|
-| `takeWhile()` | Take leading matching elements | Yes | Java 9 |
-| `dropWhile()` | Skip leading matching elements | Yes | Java 9 |
-| `iterate(seed, predicate, next)` | Finite stream generation | Yes | Java 9 |
-| `ofNullable()` | Null-safe stream creation | N/A | Java 9 |
+| Feature                          | Purpose                        | Stops Early | Java Version |
+|----------------------------------|--------------------------------|-------------|--------------|
+| `takeWhile()`                    | Take leading matching elements | Yes         | Java 9       |
+| `dropWhile()`                    | Skip leading matching elements | Yes         | Java 9       |
+| `iterate(seed, predicate, next)` | Finite stream generation       | Yes         | Java 9       |
+| `ofNullable()`                   | Null-safe stream creation      | N/A         | Java 9       |
 
 # Summary
 
 These Java 9 Stream enhancements reduce boilerplate and make pipelines more expressive:
+
 - `takeWhile()` extracts a matching prefix.
 - `dropWhile()` skips a matching prefix.
 - `iterate(seed, predicate, next)` creates finite streams naturally.
