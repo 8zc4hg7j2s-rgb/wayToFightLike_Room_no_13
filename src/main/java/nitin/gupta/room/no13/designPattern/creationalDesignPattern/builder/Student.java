@@ -16,7 +16,6 @@ public class Student {
     }
 
 
-
     public static final class Builder {
         private String name;
         private UUID id;
@@ -56,7 +55,7 @@ public class Student {
     }
 }
 
-class TestingBuilder{
+class TestingBuilder {
     public static void main(String[] args) {
         Student ss222 = Student.Builder.builder().name("sdfsfd").build();
     }

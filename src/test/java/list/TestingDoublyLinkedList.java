@@ -12,11 +12,11 @@ public class TestingDoublyLinkedList {
         list.insertAtTail(5);
         list.insertAtTail(6);
         list.insertAtTail(7);
-        list.insertAtPosition(9,7);
-        list.insertAtPosition(8,8);
-        list.insertBefore(list.getHead(),1 );
-        list.insertBefore(list.getTail(),8 );
-        list.insertBefore(list.getMiddle(),4 );
+        list.insertAtPosition(9, 7);
+        list.insertAtPosition(8, 8);
+        list.insertBefore(list.getHead(), 1);
+        list.insertBefore(list.getTail(), 8);
+        list.insertBefore(list.getMiddle(), 4);
         list.insertAfter(list.getHead(), 11);
         list.insertAfter(list.getTail(), 12);
         list.insertAfter(list.getMiddle(), 13);

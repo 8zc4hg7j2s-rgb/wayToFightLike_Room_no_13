@@ -5,7 +5,7 @@ import nitin.gupta.room.no13.datastructure.map.PMMPinCustomMap;
 public class PMMPinCustomMapTest {
 
     public static void main(String[] args) {
-        PMMPinCustomMap<Integer,Integer> bucket = new PMMPinCustomMap<>(10);
+        PMMPinCustomMap<Integer, Integer> bucket = new PMMPinCustomMap<>(10);
         bucket.put(1, 1);
         bucket.put(11, 2);
         bucket.put(21, 3);

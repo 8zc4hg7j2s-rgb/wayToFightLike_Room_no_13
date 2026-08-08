@@ -1,6 +1,7 @@
 # Java Design Patterns — Complete Guide
 
-Design patterns are proven, reusable solutions to common software design problems. The Gang of Four (GoF) classified 23 classic patterns into three categories:
+Design patterns are proven, reusable solutions to common software design problems. The Gang of Four (GoF) classified 23
+classic patterns into three categories:
 
 1. **Creational** — deal with object creation mechanisms
 2. **Structural** — deal with object composition and relationships
@@ -10,9 +11,11 @@ Design patterns are proven, reusable solutions to common software design problem
 
 ## 1. Creational Design Patterns
 
-Creational patterns abstract the instantiation process, making a system independent of how its objects are created, composed, and represented.
+Creational patterns abstract the instantiation process, making a system independent of how its objects are created,
+composed, and represented.
 
 ### 1.1 Singleton
+
 Ensures a class has only one instance and provides a global point of access to it.
 
 ```java
@@ -33,11 +36,13 @@ public class Singleton {
     }
 }
 ```
+
 **Use case:** Logging, configuration managers, thread pools, database connection pools.
 
 ---
 
 ### 1.2 Factory Method
+
 Defines an interface for creating an object but lets subclasses decide which class to instantiate.
 
 ```java
@@ -61,11 +66,13 @@ class CircleFactory extends ShapeFactory {
     Shape createShape() { return new Circle(); }
 }
 ```
+
 **Use case:** Frameworks that need to delegate object creation to subclasses (e.g., `Calendar.getInstance()`).
 
 ---
 
 ### 1.3 Abstract Factory
+
 Provides an interface for creating families of related objects without specifying their concrete classes.
 
 ```java
@@ -85,11 +92,13 @@ class WinFactory implements GUIFactory {
     public Checkbox createCheckbox() { return null; /* WinCheckbox */ }
 }
 ```
+
 **Use case:** Cross-platform UI toolkits, families of related products.
 
 ---
 
 ### 1.4 Builder
+
 Separates the construction of a complex object from its representation.
 
 ```java
@@ -115,11 +124,13 @@ class Pizza {
 // Usage
 Pizza pizza = new Pizza.Builder().size("Large").cheese(true).build();
 ```
+
 **Use case:** Objects with many optional parameters (e.g., `StringBuilder`, `Lombok @Builder`).
 
 ---
 
 ### 1.5 Prototype
+
 Creates new objects by copying an existing object (clone) rather than creating from scratch.
 
 ```java
@@ -134,15 +145,18 @@ class Document implements Cloneable {
     }
 }
 ```
+
 **Use case:** Expensive object creation, object caching, game entity spawning.
 
 ---
 
 ## 2. Structural Design Patterns
 
-Structural patterns explain how to assemble objects and classes into larger structures while keeping them flexible and efficient.
+Structural patterns explain how to assemble objects and classes into larger structures while keeping them flexible and
+efficient.
 
 ### 2.1 Adapter
+
 Converts the interface of a class into another interface clients expect.
 
 ```java
@@ -155,11 +169,13 @@ class MediaAdapter implements MediaPlayer {
     public void play(String fileName) { legacyPlayer.playVlc(fileName); }
 }
 ```
+
 **Use case:** Integrating legacy code or third-party libraries with incompatible interfaces.
 
 ---
 
 ### 2.2 Bridge
+
 Decouples an abstraction from its implementation so both can vary independently.
 
 ```java
@@ -177,11 +193,13 @@ class Circle extends Shape {
     void draw() { System.out.println("Circle filled with " + color.fill()); }
 }
 ```
+
 **Use case:** Avoiding class explosion when combining multiple dimensions (shape × color, device × OS).
 
 ---
 
 ### 2.3 Composite
+
 Composes objects into tree structures to represent part-whole hierarchies.
 
 ```java
@@ -202,11 +220,13 @@ class Manager implements Employee {
     }
 }
 ```
+
 **Use case:** File systems, UI component trees, organization hierarchies.
 
 ---
 
 ### 2.4 Decorator
+
 Attaches additional responsibilities to an object dynamically, without altering its structure.
 
 ```java
@@ -229,11 +249,13 @@ class MilkDecorator extends CoffeeDecorator {
 // Usage
 Coffee order = new MilkDecorator(new SimpleCoffee());
 ```
+
 **Use case:** `java.io` streams (`BufferedReader`, `InputStreamReader`), adding features without subclassing.
 
 ---
 
 ### 2.5 Facade
+
 Provides a simplified, unified interface to a complex subsystem.
 
 ```java
@@ -250,11 +272,13 @@ class ComputerFacade {
     }
 }
 ```
+
 **Use case:** Simplifying complex library/API usage (e.g., `javax.faces.context.FacesContext`).
 
 ---
 
 ### 2.6 Flyweight
+
 Minimizes memory usage by sharing common parts of state between multiple objects.
 
 ```java
@@ -271,11 +295,13 @@ class TreeFactory {
     }
 }
 ```
+
 **Use case:** `Integer.valueOf()` caching, text editors (character formatting), game rendering.
 
 ---
 
 ### 2.7 Proxy
+
 Provides a surrogate or placeholder for another object to control access to it.
 
 ```java
@@ -298,6 +324,7 @@ class ProxyImage implements Image {
     }
 }
 ```
+
 **Use case:** Lazy loading, access control, Spring AOP proxies, RMI.
 
 ---
@@ -307,6 +334,7 @@ class ProxyImage implements Image {
 Behavioral patterns focus on communication and responsibility distribution between objects.
 
 ### 3.1 Strategy
+
 Defines a family of algorithms and makes them interchangeable at runtime.
 
 ```java
@@ -322,11 +350,13 @@ class ShoppingCart {
     void checkout(int amount) { strategy.pay(amount); }
 }
 ```
+
 **Use case:** Sorting algorithms, payment methods, validation rules.
 
 ---
 
 ### 3.2 Observer
+
 Defines a one-to-many dependency so that when one object changes state, all dependents are notified.
 
 ```java
@@ -344,11 +374,13 @@ class Publisher {
     void notifyAll(String message) { observers.forEach(o -> o.update(message)); }
 }
 ```
+
 **Use case:** Event listeners, `java.util.Observer`, pub-sub systems, MVC view updates.
 
 ---
 
 ### 3.3 Command
+
 Encapsulates a request as an object, allowing parameterization and queuing of requests.
 
 ```java
@@ -368,11 +400,13 @@ class RemoteControl {
     void pressButton(Command command) { command.execute(); }
 }
 ```
+
 **Use case:** Undo/redo functionality, task queues, GUI button actions.
 
 ---
 
 ### 3.4 State
+
 Allows an object to alter its behavior when its internal state changes.
 
 ```java
@@ -392,11 +426,13 @@ class Context {
     void request() { state.handle(); }
 }
 ```
+
 **Use case:** Order status workflows, TCP connection states, media player controls.
 
 ---
 
 ### 3.5 Template Method
+
 Defines the skeleton of an algorithm in a method, deferring some steps to subclasses.
 
 ```java
@@ -416,11 +452,13 @@ class CsvProcessor extends DataProcessor {
     void processData() { System.out.println("Processing CSV"); }
 }
 ```
+
 **Use case:** Frameworks defining an algorithm skeleton (e.g., `HttpServlet.service()`).
 
 ---
 
 ### 3.6 Chain of Responsibility
+
 Passes a request along a chain of handlers until one of them handles it.
 
 ```java
@@ -441,11 +479,13 @@ class Director extends Approver {
     void approve(int amount) { System.out.println("Director approved"); }
 }
 ```
+
 **Use case:** Middleware pipelines, servlet filters, approval workflows, logging levels.
 
 ---
 
 ### 3.7 Iterator
+
 Provides a way to access elements of a collection sequentially without exposing its underlying structure.
 
 ```java
@@ -454,11 +494,13 @@ class NameRepository implements Iterable<String> {
     public Iterator<String> iterator() { return names.iterator(); }
 }
 ```
+
 **Use case:** `java.util.Iterator`, custom collection traversal.
 
 ---
 
 ### 3.8 Mediator
+
 Reduces coupling between components by having them communicate through a mediator object.
 
 ```java
@@ -477,11 +519,13 @@ class User {
     void send(String msg) { mediator.sendMessage(msg, this); }
 }
 ```
+
 **Use case:** Chat applications, air traffic control systems, UI dialog coordination.
 
 ---
 
 ### 3.9 Memento
+
 Captures and externalizes an object's internal state so it can be restored later, without violating encapsulation.
 
 ```java
@@ -498,11 +542,13 @@ class Originator {
     void restore(Memento m) { this.state = m.getState(); }
 }
 ```
+
 **Use case:** Undo mechanisms, checkpoints, save/load game state.
 
 ---
 
 ### 3.10 Visitor
+
 Lets you add further operations to objects without modifying their classes.
 
 ```java
@@ -518,11 +564,13 @@ class PriceVisitor implements Visitor {
     public void visit(Book book) { System.out.println("Book price: " + book.price); }
 }
 ```
+
 **Use case:** Compilers (AST traversal), operations across heterogeneous object structures.
 
 ---
 
 ### 3.11 Interpreter
+
 Defines a grammar for a language and provides an interpreter to evaluate sentences in it.
 
 ```java
@@ -534,37 +582,38 @@ class TerminalExpression implements Expression {
     public boolean interpret(String context) { return context.contains(data); }
 }
 ```
+
 **Use case:** SQL parsers, regex engines, rule engines.
 
 ---
 
 ## Quick Reference Table
 
-| Category    | Pattern                 | Core Intent                                      |
-|-------------|--------------------------|---------------------------------------------------|
-| Creational  | Singleton                | One instance, global access                        |
-| Creational  | Factory Method            | Delegate instantiation to subclasses               |
-| Creational  | Abstract Factory          | Create families of related objects                 |
-| Creational  | Builder                   | Step-by-step construction of complex objects        |
-| Creational  | Prototype                 | Clone existing objects                              |
-| Structural  | Adapter                   | Convert incompatible interfaces                     |
-| Structural  | Bridge                    | Decouple abstraction from implementation            |
-| Structural  | Composite                 | Tree structures of part-whole hierarchies           |
-| Structural  | Decorator                 | Add behavior dynamically                            |
-| Structural  | Facade                    | Simplify complex subsystem interface                |
-| Structural  | Flyweight                 | Share state to save memory                          |
-| Structural  | Proxy                     | Control access to another object                    |
-| Behavioral  | Strategy                  | Interchangeable algorithms                          |
-| Behavioral  | Observer                  | Notify dependents of state changes                  |
-| Behavioral  | Command                   | Encapsulate requests as objects                     |
-| Behavioral  | State                     | Change behavior based on internal state             |
-| Behavioral  | Template Method           | Skeleton algorithm, customizable steps              |
-| Behavioral  | Chain of Responsibility   | Pass request along a handler chain                  |
-| Behavioral  | Iterator                  | Sequential access without exposing structure         |
-| Behavioral  | Mediator                  | Centralize communication between objects            |
-| Behavioral  | Memento                   | Save/restore object state                            |
-| Behavioral  | Visitor                   | Add operations without modifying classes             |
-| Behavioral  | Interpreter               | Evaluate sentences in a defined grammar              |
+| Category   | Pattern                 | Core Intent                                  |
+|------------|-------------------------|----------------------------------------------|
+| Creational | Singleton               | One instance, global access                  |
+| Creational | Factory Method          | Delegate instantiation to subclasses         |
+| Creational | Abstract Factory        | Create families of related objects           |
+| Creational | Builder                 | Step-by-step construction of complex objects |
+| Creational | Prototype               | Clone existing objects                       |
+| Structural | Adapter                 | Convert incompatible interfaces              |
+| Structural | Bridge                  | Decouple abstraction from implementation     |
+| Structural | Composite               | Tree structures of part-whole hierarchies    |
+| Structural | Decorator               | Add behavior dynamically                     |
+| Structural | Facade                  | Simplify complex subsystem interface         |
+| Structural | Flyweight               | Share state to save memory                   |
+| Structural | Proxy                   | Control access to another object             |
+| Behavioral | Strategy                | Interchangeable algorithms                   |
+| Behavioral | Observer                | Notify dependents of state changes           |
+| Behavioral | Command                 | Encapsulate requests as objects              |
+| Behavioral | State                   | Change behavior based on internal state      |
+| Behavioral | Template Method         | Skeleton algorithm, customizable steps       |
+| Behavioral | Chain of Responsibility | Pass request along a handler chain           |
+| Behavioral | Iterator                | Sequential access without exposing structure |
+| Behavioral | Mediator                | Centralize communication between objects     |
+| Behavioral | Memento                 | Save/restore object state                    |
+| Behavioral | Visitor                 | Add operations without modifying classes     |
+| Behavioral | Interpreter             | Evaluate sentences in a defined grammar      |
 
 ---
 

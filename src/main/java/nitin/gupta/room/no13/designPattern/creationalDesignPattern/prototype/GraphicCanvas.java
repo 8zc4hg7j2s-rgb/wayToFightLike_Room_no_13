@@ -5,6 +5,7 @@ package nitin.gupta.room.no13.designPattern.creationalDesignPattern.prototype;
  * complex, or time-consuming, and you want to create new instances by cloning an existing instance
  * (the prototype) rather than using new to instantiate from scratch.
  */
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,9 @@ public class GraphicCanvas implements Cloneable {
         this.shapes.add(shape);
     }
 
-    public List<String> getShapes() { return shapes; }
+    public List<String> getShapes() {
+        return shapes;
+    }
 
     @Override
     public GraphicCanvas clone() {
